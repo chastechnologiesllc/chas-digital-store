@@ -78,7 +78,7 @@ function CheckoutPage() {
         <p className="text-xs uppercase tracking-[0.18em] text-accent">Checkout</p>
         <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight">Get access</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          Enter your details, choose a payment provider, then complete a secure checkout. Telegram access is created only after the payment is verified.
+          Enter your details and complete a secure checkout. You will be taken straight to your classroom once payment is confirmed.
         </p>
 
         <div className="mt-8 space-y-5">

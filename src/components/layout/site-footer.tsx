@@ -34,8 +34,12 @@ export function SiteFooter() {
         <div>
           <p className="text-sm font-medium">Support</p>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li>{displayContact(site.contact.email, "Email: add in site config")}</li>
-            <li>{displayContact(site.contact.phone, "Phone: add in site config")}</li>
+            {!isPlaceholder(site.contact.email) && (
+              <li>{displayContact(site.contact.email, "")}</li>
+            )}
+            {!isPlaceholder(site.contact.phone) && (
+              <li>{displayContact(site.contact.phone, "")}</li>
+            )}
             <li>
               <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
             </li>
@@ -48,9 +52,7 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>© {new Date().getFullYear()} {site.companyName}. All rights reserved.</p>
-          {isPlaceholder(site.contact.address) ? (
-            <p>Company details are stored as editable placeholders until filled in.</p>
-          ) : (
+          {!isPlaceholder(site.contact.address) && (
             <p>{site.contact.address}</p>
           )}
         </div>

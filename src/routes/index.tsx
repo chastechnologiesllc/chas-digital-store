@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Lock, Send, ShieldCheck, Wallet } from "lucide-react";
+import { ArrowRight, Lock, Send, ShieldCheck } from "lucide-react";
 import { HeroSection } from "@/components/hero/hero-section";
 import { ProductCard } from "@/components/products/product-card";
 import { Button } from "@/components/ui/button";
@@ -20,24 +20,6 @@ function Home() {
   return (
     <main id="main">
       <HeroSection />
-
-      <section className="border-y border-border bg-surface/60">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-3 sm:px-6">
-          {[
-            { icon: ShieldCheck, title: "Verified payments", body: "Access is granted only after server-side payment verification." },
-            { icon: Send, title: "Telegram classrooms", body: "Each class has a dedicated classroom. You join after checkout." },
-            { icon: Wallet, title: "Local checkout", body: "Paystack and Flutterwave, with Naira pricing for Nigerian customers." },
-          ].map((item) => (
-            <div key={item.title} className="flex gap-3">
-              <item.icon className="mt-0.5 size-4 text-accent" />
-              <div>
-                <p className="text-sm font-medium">{item.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section id="featured" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
@@ -67,7 +49,7 @@ function Home() {
             {[
               { step: "01", title: "Choose a class", body: "Open a class page, read the outline, and confirm it matches the skill you want." },
               { step: "02", title: "Pay securely", body: "Enter your details and complete checkout with Paystack or Flutterwave." },
-              { step: "03", title: "Join on Telegram", body: "After verification, your access page opens the correct class classroom." },
+              { step: "03", title: "Join on Telegram", body: "Your access link is ready immediately after payment is confirmed." },
             ].map((item) => (
               <li key={item.step} className="rounded-xl bg-background p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.08)]">
                 <p className="font-display text-sm text-accent">{item.step}</p>
@@ -82,7 +64,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="font-display text-3xl font-semibold tracking-tight">Browse by category</h2>
         <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-          Categories are reusable. New classes can land in existing groups or add their own later.
+          Find the right class for where you are right now.
         </p>
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
@@ -107,9 +89,9 @@ function Home() {
               {site.companyName} Digital Store is a catalog of applied classes — AI video, music, websites, PDF products, and surveys — not a generic lecture library.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
-              <li className="flex gap-2"><Lock className="mt-0.5 size-4 text-accent" /> Payment secrets stay on the server.</li>
-              <li className="flex gap-2"><Send className="mt-0.5 size-4 text-accent" /> Telegram access is generated only after a verified payment.</li>
-              <li className="flex gap-2"><ShieldCheck className="mt-0.5 size-4 text-accent" /> New classes are added from product configuration, not a rebuild.</li>
+              <li className="flex gap-2"><Lock className="mt-0.5 size-4 text-accent" /> Secure checkout with Paystack and Flutterwave.</li>
+              <li className="flex gap-2"><Send className="mt-0.5 size-4 text-accent" /> Instant classroom access delivered to your Telegram.</li>
+              <li className="flex gap-2"><ShieldCheck className="mt-0.5 size-4 text-accent" /> Self-paced classes you can revisit any time.</li>
             </ul>
           </div>
           <Accordion type="single" collapsible className="rounded-xl bg-background px-5 shadow-[0_0_0_1px_rgb(238_241_244/0.08)]">
@@ -126,7 +108,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
         <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Start with one class</h2>
         <p className="mx-auto mt-4 max-w-lg text-sm text-muted-foreground">
-          Pick a skill, complete checkout, and join the classroom when payment clears.
+          Pick a skill, pay once, and get instant access to your classroom.
         </p>
         <Button asChild size="lg" className="mt-8">
           <Link to="/classes">Explore Classes {activeCount > 0 ? `— ${activeCount} available` : ""}</Link>

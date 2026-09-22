@@ -47,7 +47,7 @@ function ProductPage() {
             <Badge>{product.skillLevel}</Badge>
             <Badge variant="outline" className="gap-1">
               <Send className="size-3" />
-              Telegram delivery
+              Online delivery
             </Badge>
             <Badge variant="outline">{product.duration}</Badge>
             <Badge variant="outline">{product.format.split(" ")[0]} format</Badge>
@@ -119,9 +119,9 @@ function ProductPage() {
             </p>
             <Separator className="my-4" />
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Delivery: Telegram classroom</li>
+              <li>Delivery: Telegram</li>
               <li>Level: {product.skillLevel}</li>
-              <li>Access after verified payment</li>
+              <li>Instant access after checkout</li>
             </ul>
             <Button asChild className="mt-5 w-full" size="lg">
               <Link to="/checkout/$slug" params={{ slug: product.slug }}>

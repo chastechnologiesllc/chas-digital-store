@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowDown, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
@@ -62,23 +62,9 @@ export function HeroSection() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#how-it-works">Learn More</a>
+              <a href="#how-it-works">How It Works</a>
             </Button>
           </div>
-          <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-border pt-6">
-            <div>
-              <dt className="text-xs text-muted-foreground">Classes</dt>
-              <dd className="mt-1 font-display text-lg font-semibold">5 live</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-muted-foreground">Delivery</dt>
-              <dd className="mt-1 font-display text-lg font-semibold">Telegram</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-muted-foreground">Checkout</dt>
-              <dd className="mt-1 font-display text-lg font-semibold">NGN</dd>
-            </div>
-          </dl>
         </div>
         <div className="relative h-[340px] sm:h-[420px] lg:h-[520px]">
           {ready ? (
@@ -92,13 +78,6 @@ export function HeroSection() {
           )}
         </div>
       </div>
-      <a
-        href="#featured"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs text-muted-foreground sm:flex"
-      >
-        <ArrowDown className="size-3.5" />
-        Scroll
-      </a>
     </section>
   );
 }

@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
     whoItsFor:
       "Creators, educators, freelancers, and business owners who want to produce video content faster using AI tools rather than a full studio setup.",
     format:
-      "Self-paced digital class delivered through a private Telegram classroom after payment is verified.",
+      "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
     price: 45000,
     currency: "NGN",
     image: "/products/ai-video-generator.jpg",
@@ -85,7 +85,7 @@ export const PRODUCTS: Product[] = [
       {
         question: "Will I get lifetime access?",
         answer:
-          "Access is delivered through the class Telegram channel after payment is verified. Any later updates shared in that classroom are included while the classroom remains active.",
+          "You get immediate access to your classroom on Telegram after checkout. Any updates added to the classroom later are included for as long as it stays active.",
       },
     ],
     createdAt: "2026-01-15",
@@ -103,7 +103,7 @@ export const PRODUCTS: Product[] = [
     whoItsFor:
       "Beginners, content creators, and digital entrepreneurs who want to create original audio without needing a full music-production background.",
     format:
-      "Self-paced digital class delivered through a private Telegram classroom after payment is verified.",
+      "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
     price: 35000,
     currency: "NGN",
     image: "/products/ai-music-generator.jpg",
@@ -158,7 +158,7 @@ export const PRODUCTS: Product[] = [
     whoItsFor:
       "Aspiring builders, freelancers, and business owners who want to launch websites or simple apps without waiting on a full engineering team.",
     format:
-      "Self-paced digital class delivered through a private Telegram classroom after payment is verified.",
+      "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
     price: 55000,
     currency: "NGN",
     image: "/products/ai-apps-websites.jpg",
@@ -213,7 +213,7 @@ export const PRODUCTS: Product[] = [
     whoItsFor:
       "People who want a low-overhead digital product business: guides, templates, reports, planners, and short books.",
     format:
-      "Self-paced digital class delivered through a private Telegram classroom after payment is verified.",
+      "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
     price: 40000,
     currency: "NGN",
     image: "/products/ai-pdfs-business.jpg",
@@ -268,7 +268,7 @@ export const PRODUCTS: Product[] = [
     whoItsFor:
       "Business owners, creators, researchers, and students who need cleaner data from forms and audience questions.",
     format:
-      "Self-paced digital class delivered through a private Telegram classroom after payment is verified.",
+      "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
     price: 25000,
     currency: "NGN",
     image: "/products/survey-class.jpg",

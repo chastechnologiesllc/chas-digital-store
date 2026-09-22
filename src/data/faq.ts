@@ -7,41 +7,41 @@ export const SITE_FAQS: FaqItem[] = [
   {
     question: "What is chAs Technologies LLC Digital Store?",
     answer:
-      "It is the digital classroom store of chAs Technologies LLC. You can browse practical classes on AI, digital tools, and online business, pay securely, and receive access through Telegram after payment is verified.",
+      "It is the digital classroom store of chAs Technologies LLC. You can browse practical classes on AI, digital tools, and online business, pay securely, and get instant access to your classroom.",
   },
   {
     question: "How do I get access after paying?",
     answer:
-      "After checkout, your payment is verified on the server. Only then is Telegram access generated. You will land on an access page with a button to join the correct class classroom.",
+      "As soon as your payment is confirmed, you land on an access page with a button to join your class classroom on Telegram. The whole process takes seconds.",
   },
   {
     question: "Which payment methods are accepted?",
     answer:
-      "Checkout supports Paystack and Flutterwave. Available options depend on which providers are configured. Cards, bank, and other local methods shown by the selected provider may be used.",
+      "Checkout supports Paystack and Flutterwave. Cards, bank transfers, and other local options are available at checkout depending on your preferred provider.",
   },
   {
     question: "Do I need a Telegram account?",
     answer:
-      "Yes. Classes are delivered in Telegram. Install Telegram before or immediately after purchase so you can join the classroom from the access page.",
+      "Yes. Classes are delivered in Telegram. Install the app before or right after purchase so you can join your classroom immediately.",
   },
   {
     question: "Can I get a refund?",
     answer:
-      "Refund terms are defined in the store policy placeholders. Replace [REFUND_POLICY] in the legal pages with the actual policy before taking live payments.",
+      "Please read the refund policy on our Terms page before purchasing. If you have a question about a specific order, reach out via the Contact page.",
   },
   {
     question: "Will more classes be added?",
     answer:
-      "Yes. The catalog is designed so new classes can be added from the product configuration without rebuilding the store.",
+      "Yes. New classes are added regularly. Check back often or follow us to stay updated.",
   },
   {
     question: "Is this for people in Nigeria?",
     answer:
-      "The store is designed first for Nigerian customers, with Naira pricing and local payment providers. International checkout can be enabled later through the same gateway architecture.",
+      "The store is built for Nigerian customers, with Naira pricing and local payment providers. If you are outside Nigeria, get in touch and we will guide you.",
   },
   {
     question: "Who do I contact for support?",
     answer:
-      "Use the Contact page. Support details are stored as editable placeholders until the live email, phone, or Telegram handle is added to the site configuration.",
+      "Use the Contact page and we will get back to you as quickly as possible.",
   },
 ];

@@ -9,15 +9,35 @@ export const Route = createFileRoute("/privacy")({
 function PrivacyPage() {
   return (
     <main id="main" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="font-display text-4xl font-semibold tracking-tight">Privacy</h1>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        This is a placeholder privacy notice for {site.companyName}. Replace [PRIVACY_POLICY] with the legal text that will apply once the store is live.
+      <h1 className="font-display text-4xl font-semibold tracking-tight">Privacy Notice</h1>
+      <p className="mt-4 text-sm text-muted-foreground">
+        Last updated: {new Date().getFullYear()} · {site.companyName}
       </p>
-      <div className="mt-8 space-y-4 text-sm leading-relaxed text-muted-foreground">
-        <p>
-          Checkout collects name, email, and optional phone so a payment can be created and Telegram access can be issued after verification. Payment card details are entered on Paystack or Flutterwave, not on this website.
-        </p>
-        <p>[PRIVACY_POLICY]</p>
+      <div className="mt-8 space-y-6 text-sm leading-relaxed text-muted-foreground">
+        <section>
+          <h2 className="font-medium text-foreground">What we collect</h2>
+          <p className="mt-2">
+            When you purchase a class, we collect your name, email address, and optionally your phone number. This information is used to process your order and deliver your classroom access.
+          </p>
+        </section>
+        <section>
+          <h2 className="font-medium text-foreground">Payment information</h2>
+          <p className="mt-2">
+            Card details and bank information are entered directly on Paystack or Flutterwave — not on this website. We do not store or handle your payment credentials.
+          </p>
+        </section>
+        <section>
+          <h2 className="font-medium text-foreground">How we use your data</h2>
+          <p className="mt-2">
+            Your contact details are used only to process your purchase and provide support. We do not sell or share your personal information with third parties outside of payment processing.
+          </p>
+        </section>
+        <section>
+          <h2 className="font-medium text-foreground">Contact</h2>
+          <p className="mt-2">
+            For any privacy-related questions, reach us via the Contact page.
+          </p>
+        </section>
       </div>
     </main>
   );

@@ -35,7 +35,7 @@ function ClassesPage() {
       <p className="text-xs uppercase tracking-[0.18em] text-accent">Catalog</p>
       <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight">Classes</h1>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        Practical digital classes on AI, content, websites, PDF products, and surveys. New classes can be added from the product configuration without rebuilding the store.
+        Practical digital classes on AI, content, websites, PDF products, and surveys.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-2">
