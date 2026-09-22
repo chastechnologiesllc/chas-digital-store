@@ -33,7 +33,7 @@ export function HeroSection() {
   useEffect(() => setReady(true), []);
 
   return (
-    <section className="relative min-h-[70svh] overflow-hidden lg:min-h-[min(660px,calc(100dvh-4.5rem))]">
+    <section className="relative min-h-[480px] overflow-hidden sm:min-h-[520px] lg:min-h-[560px]">
       {/* 3D scene fills the entire section as background */}
       <div className="absolute inset-0">
         {ready ? (
@@ -53,7 +53,7 @@ export function HeroSection() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
       {/* Text content — overlaid on top of 3D */}
-      <div className="relative z-10 mx-auto flex min-h-[70svh] max-w-6xl flex-col justify-start px-4 pb-16 pt-12 sm:px-6 sm:pt-20 lg:min-h-[min(660px,calc(100dvh-4.5rem))] lg:justify-center lg:py-16">
+      <div className="relative z-10 mx-auto flex min-h-[480px] max-w-6xl flex-col justify-start px-4 pb-16 pt-12 sm:min-h-[520px] sm:px-6 sm:pt-20 lg:min-h-[560px] lg:justify-center lg:py-16">
         <div className="max-w-xl">
           {/* Main headline */}
           <h1 className="max-w-[19rem] font-display text-4xl font-semibold leading-[1.04] tracking-tight sm:max-w-xl sm:text-5xl lg:text-6xl">
