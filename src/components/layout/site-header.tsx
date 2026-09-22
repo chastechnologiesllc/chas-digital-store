@@ -39,25 +39,25 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-md transition-[padding] duration-200",
-        compact ? "py-2" : "py-4",
+        "sticky top-0 z-40 border-b border-border/80 bg-background/85 shadow-[0_1px_0_rgb(255_255_255/0.03)] backdrop-blur-md transition-[padding] duration-200",
+        compact ? "py-1 sm:py-2" : "py-2 sm:py-4",
       )}
     >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-12 max-w-6xl items-center justify-between gap-3 px-4 sm:h-14 sm:gap-4 sm:px-6">
         {/* Brand logo — icon + name */}
-        <Link to="/" className="flex min-w-0 items-center gap-3">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
           <img
             src="/logo-icon.svg"
             alt={site.companyName}
-            className="size-10 flex-shrink-0"
+            className="size-9 flex-shrink-0 sm:size-10"
             width={40}
             height={40}
           />
           <span className="min-w-0">
-            <span className="block truncate font-display text-base font-semibold tracking-tight">
+            <span className="block truncate font-display text-[0.95rem] font-semibold tracking-tight sm:text-base">
               {site.companyName}
             </span>
-            <span className="block truncate text-xs text-muted-foreground">
+            <span className="block truncate text-[0.7rem] text-muted-foreground sm:text-xs">
               Digital Store
             </span>
           </span>

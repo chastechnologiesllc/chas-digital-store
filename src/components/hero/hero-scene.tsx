@@ -60,6 +60,9 @@ function Scene() {
   // On mobile: center objects so they appear below the text overlay
   // On desktop: shift right so they sit clear of the left-side text
   const groupX = mobile ? 0 : 1.1;
+  const thirdEffectPosition: [number, number, number] = mobile
+    ? [0.45, -0.8, 0.35]
+    : [0.1, -1.05, 0.35];
 
   return (
     <>
@@ -70,7 +73,14 @@ function Scene() {
       <group ref={group} position={[groupX, 0.15, 0]}>
         <Crystal position={[-1.45, 0.25, 0]} color="#d7e3eb" emissive="#6f97a8" kind="ico" speed={0.22} />
         <Crystal position={[1.55, 0.05, -0.15]} color="#8fb7c6" emissive="#5f8a99" kind="torus" speed={0.3} />
-        <Crystal position={[0.1, -1.05, 0.35]} color="#b7c8d4" emissive="#7aa3b5" kind="octa" speed={0.18} />
+        <Crystal
+          position={thirdEffectPosition}
+          color="#b7c8d4"
+          emissive="#7aa3b5"
+          kind="octa"
+          speed={0.18}
+          scale={mobile ? 0.55 : 1}
+        />
         {!mobile ? (
           <Crystal position={[-0.05, 1.25, -0.45]} color="#eef3f7" emissive="#9eb0c0" kind="box" speed={0.16} />
         ) : null}

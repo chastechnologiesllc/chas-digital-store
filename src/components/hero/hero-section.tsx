@@ -22,7 +22,7 @@ function HeroFallback() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_45%,rgb(122_163_181/0.25),transparent_45%),radial-gradient(circle_at_80%_70%,rgb(232_238_244/0.10),transparent_36%)]" />
       <div className="absolute left-[55%] top-[30%] size-32 rotate-12 rounded-lg bg-accent/20" />
       <div className="absolute right-[15%] top-[40%] size-24 rounded-full bg-primary/15" />
-      <div className="absolute bottom-[25%] left-[60%] h-20 w-28 rounded-md bg-foreground/10" />
+      <div className="absolute bottom-[22%] left-[58%] h-12 w-16 rounded-md bg-foreground/10 sm:h-20 sm:w-28" />
       <div className="absolute right-[25%] bottom-[35%] size-16 rotate-45 bg-accent/15" />
     </div>
   );
@@ -33,7 +33,7 @@ export function HeroSection() {
   useEffect(() => setReady(true), []);
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100dvh-4.5rem)]">
+    <section className="relative min-h-[calc(100dvh-4.5rem)] overflow-hidden">
       {/* 3D scene fills the entire section as background */}
       <div className="absolute inset-0">
         {ready ? (
@@ -53,36 +53,22 @@ export function HeroSection() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
       {/* Text content — overlaid on top of 3D */}
-      <div className="relative z-10 mx-auto flex max-w-6xl min-h-[calc(100dvh-4.5rem)] flex-col justify-center px-4 py-16 sm:px-6">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-6xl flex-col justify-start px-4 pb-24 pt-16 sm:px-6 sm:pt-24 lg:justify-center lg:py-16">
         <div className="max-w-xl">
-          {/* Brand mark */}
-          <div className="flex items-center gap-2 mb-6">
-            <img
-              src="/logo-icon.svg"
-              alt={site.companyName}
-              className="size-5 flex-shrink-0 opacity-80"
-              width={20}
-              height={20}
-            />
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-accent">
-              {site.storeName}
-            </p>
-          </div>
-
           {/* Main headline */}
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-[19rem] font-display text-4xl font-semibold leading-[1.04] tracking-tight sm:max-w-xl sm:text-5xl lg:text-6xl">
             {site.tagline}
           </h1>
 
           {/* CTAs */}
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg">
+          <div className="mt-8 grid max-w-md grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link to="/classes">
                 Explore Classes
                 <ChevronRight />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <a href="#how-it-works">How It Works</a>
             </Button>
           </div>
