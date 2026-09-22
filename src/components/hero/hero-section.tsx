@@ -69,7 +69,7 @@ export function HeroSection() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
-              <a href="#how-it-works">How It Works</a>
+              <Link to="/how-it-works">How It Works</Link>
             </Button>
           </div>
         </div>

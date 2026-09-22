@@ -15,29 +15,6 @@ function Home() {
     <main id="main">
       <HeroSection />
 
-      {/* How It Works */}
-      <section id="how-it-works" className="border-y border-border bg-surface/40">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <p className="text-xs uppercase tracking-[0.18em] text-accent">How it works</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight">
-            Three steps from class to classroom
-          </h2>
-          <ol className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              { step: "01", title: "Choose a class", body: "Browse the catalog and pick the skill you want to learn." },
-              { step: "02", title: "Pay securely", body: "Complete checkout with Paystack or Flutterwave in Naira." },
-              { step: "03", title: "Join on Telegram", body: "Get instant access to your classroom right after payment." },
-            ].map((item) => (
-              <li key={item.step} className="rounded-xl bg-background p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.08)]">
-                <p className="font-display text-sm text-accent">{item.step}</p>
-                <h3 className="mt-3 font-display text-xl font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       {/* Browse by Category */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="font-display text-3xl font-semibold tracking-tight">Browse by category</h2>
