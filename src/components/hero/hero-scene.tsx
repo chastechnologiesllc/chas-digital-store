@@ -70,7 +70,7 @@ function Scene() {
       <directionalLight position={[3.5, 4.5, 4]} intensity={1.6} color="#f2f6fa" />
       <pointLight position={[-2.8, 1.4, 2.2]} intensity={2.2} color="#8fbfd0" />
       <pointLight position={[2.4, -1.2, 1.4]} intensity={1.1} color="#e8eef4" />
-      <group ref={group} position={[groupX, 0.15, 0]}>
+      <group ref={group} position={[groupX, 0.12, 0]} scale={mobile ? 0.78 : 0.82}>
         <Crystal position={[-1.45, 0.25, 0]} color="#d7e3eb" emissive="#6f97a8" kind="ico" speed={0.22} />
         <Crystal position={[1.55, 0.05, -0.15]} color="#8fb7c6" emissive="#5f8a99" kind="torus" speed={0.3} />
         <Crystal
@@ -79,7 +79,7 @@ function Scene() {
           emissive="#7aa3b5"
           kind="octa"
           speed={0.18}
-          scale={mobile ? 0.55 : 0.68}
+            scale={mobile ? 0.48 : 0.58}
         />
         {!mobile ? (
           <Crystal
@@ -88,11 +88,11 @@ function Scene() {
             emissive="#9eb0c0"
             kind="box"
             speed={0.16}
-            scale={0.68}
+            scale={0.58}
           />
         ) : null}
         {!mobile ? (
-          <Crystal position={[1.05, -0.35, 0.95]} color="#9ec9d4" emissive="#7aa3b5" kind="sphere" speed={0.34} scale={1.1} />
+          <Crystal position={[1.05, -0.35, 0.95]} color="#9ec9d4" emissive="#7aa3b5" kind="sphere" speed={0.34} scale={0.9} />
         ) : null}
       </group>
     </>
