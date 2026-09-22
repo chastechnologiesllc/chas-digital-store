@@ -62,7 +62,7 @@ function Scene() {
   const groupX = mobile ? 0 : 1.1;
   const thirdEffectPosition: [number, number, number] = mobile
     ? [0.45, -0.8, 0.35]
-    : [0.1, -1.05, 0.35];
+    : [0.35, -0.85, 0.35];
 
   return (
     <>
@@ -79,10 +79,17 @@ function Scene() {
           emissive="#7aa3b5"
           kind="octa"
           speed={0.18}
-          scale={mobile ? 0.55 : 1}
+          scale={mobile ? 0.55 : 0.68}
         />
         {!mobile ? (
-          <Crystal position={[-0.05, 1.25, -0.45]} color="#eef3f7" emissive="#9eb0c0" kind="box" speed={0.16} />
+          <Crystal
+            position={[-0.05, 0.98, -0.45]}
+            color="#eef3f7"
+            emissive="#9eb0c0"
+            kind="box"
+            speed={0.16}
+            scale={0.68}
+          />
         ) : null}
         {!mobile ? (
           <Crystal position={[1.05, -0.35, 0.95]} color="#9ec9d4" emissive="#7aa3b5" kind="sphere" speed={0.34} scale={1.1} />
