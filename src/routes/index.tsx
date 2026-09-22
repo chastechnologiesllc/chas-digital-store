@@ -1,13 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeroSection } from "@/components/hero/hero-section";
-import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/data/categories";
-import { getActiveProducts, getUsedCategories } from "@/data/products";
+import { getUsedCategories } from "@/data/products";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  const activeCount = getActiveProducts().length;
   const used = getUsedCategories();
   const categories = CATEGORIES.filter((c) => used.has(c.id));
 
@@ -33,20 +31,6 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
-        <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Start with one class
-        </h2>
-        <p className="mx-auto mt-4 max-w-lg text-sm text-muted-foreground">
-          Pick a skill, pay once, and get instant access to your classroom.
-        </p>
-        <Button asChild size="lg" className="mt-8">
-          <Link to="/classes">
-            Explore Classes {activeCount > 0 ? `— ${activeCount} available` : ""}
-          </Link>
-        </Button>
-      </section>
     </main>
   );
 }
