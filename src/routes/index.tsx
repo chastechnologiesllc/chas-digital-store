@@ -1,15 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero/hero-section";
-import { ProductCard } from "@/components/products/product-card";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/data/categories";
-import { getActiveProducts, getFeaturedProducts, getUsedCategories } from "@/data/products";
+import { getActiveProducts, getUsedCategories } from "@/data/products";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  const products = getFeaturedProducts();
   const activeCount = getActiveProducts().length;
   const used = getUsedCategories();
   const categories = CATEGORIES.filter((c) => used.has(c.id));
@@ -17,29 +14,6 @@ function Home() {
   return (
     <main id="main">
       <HeroSection />
-
-      {/* Featured Classes */}
-      <section id="featured" className="mx-auto max-w-6xl px-4 pb-16 pt-0 sm:px-6 sm:pb-20 sm:pt-0">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-accent">Featured classes</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight">
-              Learn a skill you can use this week
-            </h2>
-          </div>
-          <Button asChild variant="outline">
-            <Link to="/classes">
-              All classes
-              <ArrowRight />
-            </Link>
-          </Button>
-        </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} featured />
-          ))}
-        </div>
-      </section>
 
       {/* How It Works */}
       <section id="how-it-works" className="border-y border-border bg-surface/40">
