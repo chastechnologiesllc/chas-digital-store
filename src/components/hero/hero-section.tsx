@@ -18,12 +18,12 @@ class CanvasErrorBoundary extends Component<{ fallback: ReactNode; children: Rea
 
 function HeroFallback() {
   return (
-    <div className="relative size-full overflow-hidden rounded-xl bg-surface shadow-[0_0_0_1px_rgb(238_241_244/0.08)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_32%_28%,rgb(122_163_181/0.28),transparent_40%),radial-gradient(circle_at_78%_68%,rgb(232_238_244/0.12),transparent_36%)]" />
-      <div className="absolute left-[16%] top-[24%] size-32 rotate-12 rounded-lg bg-accent/35" />
-      <div className="absolute right-[18%] top-[34%] size-24 rounded-full bg-primary/20" />
-      <div className="absolute bottom-[20%] left-[36%] h-20 w-28 rounded-md bg-foreground/15" />
-      <div className="absolute right-[30%] bottom-[28%] size-16 rotate-45 bg-accent/25" />
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_45%,rgb(122_163_181/0.25),transparent_45%),radial-gradient(circle_at_80%_70%,rgb(232_238_244/0.10),transparent_36%)]" />
+      <div className="absolute left-[55%] top-[30%] size-32 rotate-12 rounded-lg bg-accent/20" />
+      <div className="absolute right-[15%] top-[40%] size-24 rounded-full bg-primary/15" />
+      <div className="absolute bottom-[25%] left-[60%] h-20 w-28 rounded-md bg-foreground/10" />
+      <div className="absolute right-[25%] bottom-[35%] size-16 rotate-45 bg-accent/15" />
     </div>
   );
 }
@@ -33,12 +33,30 @@ export function HeroSection() {
   useEffect(() => setReady(true), []);
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgb(122_163_181/0.12),transparent_34%),radial-gradient(circle_at_10%_80%,rgb(232_238_244/0.05),transparent_28%)]" />
-      <div className="mx-auto grid min-h-[calc(100dvh-4.5rem)] max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:py-16">
-        <div className="relative z-10 max-w-xl">
-          {/* Brand logo mark + store name */}
-          <div className="flex items-center gap-2">
+    <section className="relative overflow-hidden min-h-[calc(100dvh-4.5rem)]">
+      {/* 3D scene fills the entire section as background */}
+      <div className="absolute inset-0">
+        {ready ? (
+          <CanvasErrorBoundary fallback={<HeroFallback />}>
+            <Suspense fallback={<HeroFallback />}>
+              <HeroScene />
+            </Suspense>
+          </CanvasErrorBoundary>
+        ) : (
+          <HeroFallback />
+        )}
+      </div>
+
+      {/* Gradient overlay: fades dark-to-clear on mobile (top→bottom), left-to-clear on desktop */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-transparent lg:bg-gradient-to-r lg:from-background/92 lg:via-background/65 lg:to-transparent" />
+      {/* Bottom fade so the section blends into the next section */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+
+      {/* Text content — overlaid on top of 3D */}
+      <div className="relative z-10 mx-auto flex max-w-6xl min-h-[calc(100dvh-4.5rem)] flex-col justify-center px-4 py-16 sm:px-6">
+        <div className="max-w-xl">
+          {/* Brand mark */}
+          <div className="flex items-center gap-2 mb-6">
             <img
               src="/logo-icon.svg"
               alt={site.companyName}
@@ -46,15 +64,18 @@ export function HeroSection() {
               width={20}
               height={20}
             />
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-accent">{site.storeName}</p>
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-accent">
+              {site.storeName}
+            </p>
           </div>
-          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+
+          {/* Main headline */}
+          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             {site.tagline}
           </h1>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {site.description}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg">
               <Link to="/classes">
                 Explore Classes
@@ -65,17 +86,6 @@ export function HeroSection() {
               <a href="#how-it-works">How It Works</a>
             </Button>
           </div>
-        </div>
-        <div className="relative h-[340px] sm:h-[420px] lg:h-[520px]">
-          {ready ? (
-            <CanvasErrorBoundary fallback={<HeroFallback />}>
-              <Suspense fallback={<HeroFallback />}>
-                <HeroScene />
-              </Suspense>
-            </CanvasErrorBoundary>
-          ) : (
-            <HeroFallback />
-          )}
         </div>
       </div>
     </section>

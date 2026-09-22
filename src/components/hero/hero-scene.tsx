@@ -57,13 +57,17 @@ function Scene() {
     group.current.position.y = Math.sin(t * 0.6) * 0.08;
   });
 
+  // On mobile: center objects so they appear below the text overlay
+  // On desktop: shift right so they sit clear of the left-side text
+  const groupX = mobile ? 0 : 1.1;
+
   return (
     <>
       <ambientLight intensity={0.85} />
       <directionalLight position={[3.5, 4.5, 4]} intensity={1.6} color="#f2f6fa" />
       <pointLight position={[-2.8, 1.4, 2.2]} intensity={2.2} color="#8fbfd0" />
       <pointLight position={[2.4, -1.2, 1.4]} intensity={1.1} color="#e8eef4" />
-      <group ref={group} position={[0, 0.15, 0]}>
+      <group ref={group} position={[groupX, 0.15, 0]}>
         <Crystal position={[-1.45, 0.25, 0]} color="#d7e3eb" emissive="#6f97a8" kind="ico" speed={0.22} />
         <Crystal position={[1.55, 0.05, -0.15]} color="#8fb7c6" emissive="#5f8a99" kind="torus" speed={0.3} />
         <Crystal position={[0.1, -1.05, 0.35]} color="#b7c8d4" emissive="#7aa3b5" kind="octa" speed={0.18} />
