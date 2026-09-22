@@ -19,7 +19,7 @@ function Home() {
       <HeroSection />
 
       {/* Featured Classes */}
-      <section id="featured" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <section id="featured" className="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-accent">Featured classes</p>
