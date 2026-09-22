@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <!-- Blue C arc: counterclockwise from upper-right (330°) through top/left/bottom to lower-right (30°) — 300° sweep -->
+  <path d="M 33.86 12 A 16 16 0 1 0 33.86 28"
+        stroke="#1D6FE0" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- White A letterform — two legs meeting at peak, crossbar intersecting at ~63% height -->
+  <polyline points="12.5,30 20,10.5 27.5,30"
+            fill="none" stroke="white" stroke-width="3.5"
+            stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="15.3" y1="23" x2="24.7" y2="23"
+        stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

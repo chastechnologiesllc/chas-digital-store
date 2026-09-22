@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background rounded square -->
+  <rect width="32" height="32" rx="7" fill="#08090c"/>
+  <!-- Blue C arc, scaled to 32×32 (center 16,16 radius 12.8) -->
+  <path d="M 27.09 9.6 A 12.8 12.8 0 1 0 27.09 22.4"
+        stroke="#1D6FE0" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  <!-- White A letterform scaled to 32×32 -->
+  <polyline points="10,24 16,8.4 22,24"
+            fill="none" stroke="white" stroke-width="2.8"
+            stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="12.24" y1="18.4" x2="19.76" y2="18.4"
+        stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+</svg>
