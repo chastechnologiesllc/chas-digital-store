@@ -3,7 +3,7 @@ import { z } from "zod";
 import { ProductCard } from "@/components/products/product-card";
 import { Badge } from "@/components/ui/badge";
 import { CATEGORIES } from "@/data/categories";
-import { getActiveProducts, getProductsByCategory, getUsedCategories } from "@/data/products";
+import { getCategoryHubProducts, getProductsByCategory, getUsedCategories } from "@/data/products";
 import { cn } from "@/lib/utils";
 
 const searchSchema = z.object({
@@ -28,7 +28,7 @@ function ClassesPage() {
   const { category } = Route.useSearch();
   const used = getUsedCategories();
   const filters = CATEGORIES.filter((item) => used.has(item.id));
-  const products = category ? getProductsByCategory(category) : getActiveProducts();
+  const products = category ? getProductsByCategory(category) : getCategoryHubProducts();
   const selectedCategory = category ? CATEGORIES.find((item) => item.id === category) : undefined;
 
   return (
@@ -39,8 +39,8 @@ function ClassesPage() {
       </h1>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
         {selectedCategory
-          ? `Explore classes under ${selectedCategory.label.toLowerCase()} and open the course that fits your goal.`
-          : "Explore practical digital classes by category, then open the course you want to learn."}
+          ? selectedCategory.description
+          : "Choose a category to explore the classes available for students."}
       </p>
 
       <div className="mt-8 flex flex-wrap gap-2">

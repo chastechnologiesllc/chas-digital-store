@@ -427,6 +427,15 @@ export function getActiveProducts(): Product[] {
   return PRODUCTS.filter((product) => product.active && product.catalogVisible !== false);
 }
 
+export function getCategoryHubProducts(): Product[] {
+  const seen = new Set<CategoryId>();
+  return getActiveProducts().filter((product) => {
+    if (seen.has(product.category)) return false;
+    seen.add(product.category);
+    return true;
+  });
+}
+
 export function getFeaturedProducts(): Product[] {
   return getActiveProducts().filter((product) => product.featured);
 }

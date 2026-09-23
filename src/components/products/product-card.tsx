@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getCategory } from "@/data/categories";
 import type { Product } from "@/data/products";
-import { formatMoney } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 export function ProductCard({
@@ -19,8 +18,7 @@ export function ProductCard({
 }) {
   const category = getCategory(product.category);
   const isMusicCourse = product.slug === "ai-music-generator";
-  const isMusicHub = isMusicCourse && categoryHub;
-  const courseTarget = isMusicHub ? "/classes" : isMusicCourse ? "/programs/oryn-soundz" : "/classes/$slug";
+  const courseTarget = categoryHub ? "/classes" : isMusicCourse ? "/programs/oryn-soundz" : "/classes/$slug";
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const onMove = (event: MouseEvent<HTMLElement>) => {
@@ -32,6 +30,12 @@ export function ProductCard({
     setTilt({ x: (y - 0.5) * -6, y: (x - 0.5) * 8 });
   };
 
+  const linkProps = categoryHub
+    ? { to: "/classes" as const, search: { category: product.category } }
+    : isMusicCourse
+      ? { to: "/programs/oryn-soundz" as const }
+      : { to: "/classes/$slug" as const, params: { slug: product.slug } };
+
   return (
     <article
       onMouseMove={onMove}
@@ -42,12 +46,7 @@ export function ProductCard({
       )}
       style={{ transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
     >
-      <Link
-        to={courseTarget}
-        search={isMusicHub ? { category: "music" } : undefined}
-        params={!isMusicHub && !isMusicCourse ? { slug: product.slug } : undefined}
-        className="relative block aspect-[16/10] overflow-hidden bg-surface-2"
-      >
+      <Link {...linkProps} className="relative block aspect-[16/10] overflow-hidden bg-surface-2">
         <img
           src={product.image}
           alt=""
@@ -60,37 +59,29 @@ export function ProductCard({
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="space-y-2">
           <h3 className="font-display text-lg font-semibold tracking-tight">
-            <Link
-              to={courseTarget}
-              search={isMusicHub ? { category: "music" } : undefined}
-              params={!isMusicHub && !isMusicCourse ? { slug: product.slug } : undefined}
-              className="hover:text-accent"
-            >
-              {isMusicHub ? "AI Music" : isMusicCourse ? "AI Music Generator Class by Oryn Soundz" : product.name}
+            <Link {...linkProps} className="hover:text-accent">
+              {categoryHub ? category?.label ?? product.category : isMusicCourse ? "AI Music Generator Class by Oryn Soundz" : product.name}
             </Link>
           </h3>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            {isMusicHub
-              ? "Explore classes under music."
+            {categoryHub
+              ? category?.description ?? product.description
               : isMusicCourse
                 ? "Learn practical AI music creation, then explore the full course packages."
                 : product.description}
           </p>
         </div>
-        {!isMusicHub ? <div className="mt-auto flex flex-wrap gap-2 text-xs text-muted-foreground">
-          {featured ? <Badge variant="outline">{product.duration}</Badge> : null}
-        </div> : <div className="mt-auto" />}
-        <div className={cn("flex items-end justify-between gap-3", (isMusicHub || isMusicCourse) && "justify-end")}>
-          {isMusicHub || isMusicCourse ? null : <p className="font-display text-xl font-semibold tabular-nums">
-            {formatMoney(product.price, product.currency)}
-          </p>}
+        {!categoryHub ? (
+          <div className="mt-auto flex flex-wrap gap-2 text-xs text-muted-foreground">
+            {featured ? <Badge variant="outline">{product.duration}</Badge> : null}
+          </div>
+        ) : (
+          <div className="mt-auto" />
+        )}
+        <div className="flex items-end justify-end gap-3">
           <Button asChild size="sm" variant="secondary">
-            <Link
-              to={courseTarget}
-              search={isMusicHub ? { category: "music" } : undefined}
-              params={!isMusicHub && !isMusicCourse ? { slug: product.slug } : undefined}
-            >
-              {isMusicHub ? "Explore music" : isMusicCourse ? "Open class" : "View Class"}
+            <Link {...linkProps}>
+              {categoryHub ? `Explore ${category?.label ?? "category"}` : isMusicCourse ? "Open class" : "View Class"}
               <ArrowUpRight />
             </Link>
           </Button>
