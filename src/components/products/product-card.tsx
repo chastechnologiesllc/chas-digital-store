@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 export function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
   const category = getCategory(product.category);
+  const isMusicHub = product.slug === "ai-music-generator";
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const onMove = (event: MouseEvent<HTMLElement>) => {
@@ -32,8 +33,8 @@ export function ProductCard({ product, featured = false }: { product: Product; f
       style={{ transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
     >
       <Link
-        to="/classes/$slug"
-        params={{ slug: product.slug }}
+        to={isMusicHub ? "/programs/oryn-soundz" : "/classes/$slug"}
+        params={isMusicHub ? undefined : { slug: product.slug }}
         className="relative block aspect-[16/10] overflow-hidden bg-surface-2"
       >
         <img
@@ -48,22 +49,31 @@ export function ProductCard({ product, featured = false }: { product: Product; f
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="space-y-2">
           <h3 className="font-display text-lg font-semibold tracking-tight">
-            <Link to="/classes/$slug" params={{ slug: product.slug }} className="hover:text-accent">
-              {product.name}
+            <Link
+              to={isMusicHub ? "/programs/oryn-soundz" : "/classes/$slug"}
+              params={isMusicHub ? undefined : { slug: product.slug }}
+              className="hover:text-accent"
+            >
+              {isMusicHub ? "AI Music" : product.name}
             </Link>
           </h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">{product.description}</p>
-        </div>
-        <div className="mt-auto flex flex-wrap gap-2 text-xs text-muted-foreground">
-          {featured ? <Badge variant="outline">{product.duration}</Badge> : null}
-        </div>
-        <div className="flex items-end justify-between gap-3">
-          <p className="font-display text-xl font-semibold tabular-nums">
-            {formatMoney(product.price, product.currency)}
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {isMusicHub ? "Browse AI music courses created for different skills, goals, and stages." : product.description}
           </p>
+        </div>
+        {!isMusicHub ? <div className="mt-auto flex flex-wrap gap-2 text-xs text-muted-foreground">
+          {featured ? <Badge variant="outline">{product.duration}</Badge> : null}
+        </div> : <div className="mt-auto" />}
+        <div className={cn("flex items-end justify-between gap-3", isMusicHub && "justify-end")}>
+          {isMusicHub ? null : <p className="font-display text-xl font-semibold tabular-nums">
+            {formatMoney(product.price, product.currency)}
+          </p>}
           <Button asChild size="sm" variant="secondary">
-            <Link to="/classes/$slug" params={{ slug: product.slug }}>
-              View Class
+            <Link
+              to={isMusicHub ? "/programs/oryn-soundz" : "/classes/$slug"}
+              params={isMusicHub ? undefined : { slug: product.slug }}
+            >
+              {isMusicHub ? "Browse courses" : "View Class"}
               <ArrowUpRight />
             </Link>
           </Button>

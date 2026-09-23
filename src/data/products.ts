@@ -23,6 +23,7 @@ export type Product = {
   image: string;
   featured: boolean;
   active: boolean;
+  catalogVisible?: boolean;
   skillLevel: SkillLevel;
   deliveryType: DeliveryType;
   telegramAccessId: string;
@@ -164,6 +165,7 @@ export const PRODUCTS: Product[] = [
     image: "/products/ai-music-generator.jpg",
     featured: false,
     active: true,
+    catalogVisible: false,
     skillLevel: "Intermediate",
     deliveryType: "telegram",
     telegramAccessId: "oryn-soundz-artist-release",
@@ -218,6 +220,7 @@ export const PRODUCTS: Product[] = [
     image: "/products/ai-music-generator.jpg",
     featured: false,
     active: true,
+    catalogVisible: false,
     skillLevel: "Advanced",
     deliveryType: "telegram",
     telegramAccessId: "oryn-soundz-business-coaching",
@@ -421,7 +424,7 @@ export const PRODUCTS: Product[] = [
 ];
 
 export function getActiveProducts(): Product[] {
-  return PRODUCTS.filter((product) => product.active);
+  return PRODUCTS.filter((product) => product.active && product.catalogVisible !== false);
 }
 
 export function getFeaturedProducts(): Product[] {
