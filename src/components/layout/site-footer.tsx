@@ -17,6 +17,7 @@ export function SiteFooter() {
             />
             <p className="font-display text-lg font-semibold tracking-tight">{site.companyName}</p>
           </div>
+          <p className="ml-10 text-xs text-muted-foreground">Digital Store</p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
             {site.description}
           </p>
