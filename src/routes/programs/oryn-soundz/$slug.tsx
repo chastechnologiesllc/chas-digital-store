@@ -79,9 +79,9 @@ export const Route = createFileRoute("/programs/oryn-soundz/$slug")({
 function PackageDetailPage() {
   const { product, meta } = Route.useLoaderData();
   const [copied, setCopied] = useState(false);
-  const [country, setCountry] = useState<PricingCountry>("NG");
+  const [country, setCountry] = useState<PricingCountry | null>(null);
   const detectCountry = getPricingCountryFn;
-  const localizedPrice = getLocalizedPrice(product, country);
+  const localizedPrice = country ? getLocalizedPrice(product, country) : null;
   useEffect(() => {
     detectCountry().then(setCountry).catch(() => undefined);
   }, [detectCountry]);
@@ -118,7 +118,7 @@ function PackageDetailPage() {
           <section className="mt-12"><h2 className="font-display text-2xl font-semibold">Questions students ask</h2><Accordion type="single" collapsible className="mt-4">{product.faqs.map((item, index) => <AccordionItem key={item.question} value={`faq-${index}`}><AccordionTrigger>{item.question}</AccordionTrigger><AccordionContent>{item.answer}</AccordionContent></AccordionItem>)}</Accordion></section>
         </div>
 
-        <aside className="h-fit lg:sticky lg:top-24"><div className="rounded-2xl border border-[#b38a45]/35 bg-card p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.06)]"><img src="/products/oryn-soundz-profile.jpg" alt="Oryn Soundz" className="size-14 rounded-full object-cover ring-2 ring-[#d7a947]" /><p className="mt-5 text-xs uppercase tracking-[0.16em] text-accent">{meta.label}</p><h2 className="mt-2 font-display text-2xl font-semibold">Ready when you are.</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Take the next step with a clear package, practical lessons, and a path that matches where you are right now.</p><p className="mt-6 font-display text-3xl font-semibold tabular-nums">{formatMoney(localizedPrice.amount, localizedPrice.currency)}</p><p className="mt-2 text-xs text-muted-foreground">Price for {getCountryLabel(country)}</p><Button asChild size="lg" className="mt-5 w-full"><Link to="/checkout/$slug" params={{ slug: product.slug }}>Continue to checkout <ArrowRight /></Link></Button><p className="mt-3 flex items-center justify-center gap-1 text-center text-xs text-muted-foreground"><Send className="size-3" /> Access delivered after checkout</p></div></aside>
+        <aside className="h-fit lg:sticky lg:top-24"><div className="rounded-2xl border border-[#b38a45]/35 bg-card p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.06)]"><img src="/products/oryn-soundz-profile.jpg" alt="Oryn Soundz" className="size-14 rounded-full object-cover ring-2 ring-[#d7a947]" /><p className="mt-5 text-xs uppercase tracking-[0.16em] text-accent">{meta.label}</p><h2 className="mt-2 font-display text-2xl font-semibold">Ready when you are.</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Take the next step with a clear package, practical lessons, and a path that matches where you are right now.</p><p className="mt-6 font-display text-3xl font-semibold tabular-nums">{localizedPrice ? formatMoney(localizedPrice.amount, localizedPrice.currency) : "Checking local price…"}</p><p className="mt-2 text-xs text-muted-foreground">{country ? `Price for ${getCountryLabel(country)}` : "Detecting your country"}</p><Button asChild size="lg" className="mt-5 w-full"><Link to="/checkout/$slug" params={{ slug: product.slug }}>Continue to checkout <ArrowRight /></Link></Button><p className="mt-3 flex items-center justify-center gap-1 text-center text-xs text-muted-foreground"><Send className="size-3" /> Access delivered after checkout</p></div></aside>
       </div>
       <p className="mx-auto mt-10 max-w-2xl text-center text-xs leading-relaxed text-muted-foreground">Results depend on your practice, decisions, platforms, audience, and current rules. No streams, followers, approval, verification, reach, or income are guaranteed.</p>
     </main>

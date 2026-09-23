@@ -32,7 +32,7 @@ export async function initializePayment(
   if (!product.active) {
     throw new Error("This class is not currently for sale.");
   }
-  const country = normalizePricingCountry(input.country ?? getPricingCountryFromHeaders(getRequest().headers));
+  const country = normalizePricingCountry(getPricingCountryFromHeaders(getRequest().headers));
   const localizedPrice = getLocalizedPrice(product, country);
   if (localizedPrice.amount <= 0) {
     throw new Error("This class does not have a valid price.");

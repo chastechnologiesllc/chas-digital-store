@@ -36,9 +36,9 @@ function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [gateway, setGateway] = useState<GatewayId>("paystack");
   const [submitting, setSubmitting] = useState(false);
-  const [country, setCountry] = useState<PricingCountry>("NG");
+  const [country, setCountry] = useState<PricingCountry | null>(null);
 
-  const localizedPrice = getLocalizedPrice(product, country);
+  const localizedPrice = country ? getLocalizedPrice(product, country) : null;
 
   useEffect(() => {
     loadGateways()
@@ -61,6 +61,10 @@ function CheckoutPage() {
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (!country) {
+      toast.error("Still detecting your country. Please try again in a moment.");
+      return;
+    }
     setSubmitting(true);
     try {
       const result = await initialize({
@@ -140,8 +144,8 @@ function CheckoutPage() {
           </RadioGroup>
         </fieldset>
 
-        <Button type="submit" size="lg" className="mt-8 w-full sm:w-auto" disabled={submitting}>
-          {submitting ? "Starting checkout…" : `Pay ${formatMoney(localizedPrice.amount, localizedPrice.currency)}`}
+        <Button type="submit" size="lg" className="mt-8 w-full sm:w-auto" disabled={submitting || !country}>
+          {submitting ? "Starting checkout…" : localizedPrice ? `Pay ${formatMoney(localizedPrice.amount, localizedPrice.currency)}` : "Detecting local price…"}
         </Button>
         {selected && !selected.live ? (
           <p className="mt-3 text-xs text-muted-foreground">
@@ -160,9 +164,9 @@ function CheckoutPage() {
         />
         <p className="mt-4 text-sm text-muted-foreground">{product.description}</p>
         <p className="mt-5 font-display text-2xl font-semibold tabular-nums">
-          {formatMoney(localizedPrice.amount, localizedPrice.currency)}
+          {localizedPrice ? formatMoney(localizedPrice.amount, localizedPrice.currency) : "Checking local price…"}
         </p>
-        <p className="mt-2 text-xs text-muted-foreground">Price for {getCountryLabel(country)}</p>
+        <p className="mt-2 text-xs text-muted-foreground">{country ? `Price for ${getCountryLabel(country)}` : "Detecting your country"}</p>
         <Link to={product.slug === "ai-music-generator" || product.slug.startsWith("oryn-soundz-") ? "/programs/oryn-soundz/$slug" : "/classes/$slug"} params={{ slug: product.slug }} className="mt-4 inline-block text-sm text-accent hover:underline">
           Back to package details
         </Link>

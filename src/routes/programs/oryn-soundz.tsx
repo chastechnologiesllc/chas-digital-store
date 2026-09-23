@@ -41,7 +41,7 @@ const packageContent = [
     humanDescription: "Turn your strongest songs into a recognizable artist project with a clear release path and portfolio.",
     items: ["Everything in AI Music Starter", "Artist identity, branding, profiles, and portfolio", "Distribution preparation, music videos, content, and release workflow"],
     cta: "Build your artist project",
-    tone: "border-[#b38a45]/45 bg-[#211b15]",
+    tone: "border-[#8b7cf6]/60 bg-[#17152b]",
   },
   {
     slug: "oryn-soundz-business-coaching",
@@ -59,7 +59,7 @@ const packageContent = [
 function OrynSoundzPage() {
   const pathname = useRouterState({ select: (state) => state.location.pathname.replace(/\/$/, "") });
   const detectCountry = getPricingCountryFn;
-  const [country, setCountry] = useState<PricingCountry>("NG");
+  const [country, setCountry] = useState<PricingCountry | null>(null);
 
   useEffect(() => {
     detectCountry().then(setCountry).catch(() => undefined);
@@ -100,7 +100,7 @@ function OrynSoundzPage() {
           <p className="text-xs uppercase tracking-[0.18em] text-accent">Choose your next step</p>
           <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Three packages. One clear progression.</h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Each package builds on the one before it, so you can start at the level that feels right and upgrade when your music is ready for more.</p>
-          <p className="mt-3 text-xs text-accent">Showing prices for {getCountryLabel(country)}. Your final payment total is confirmed at checkout.</p>
+          <p className="mt-3 text-xs text-accent">{country ? `Showing prices for ${getCountryLabel(country)}. Your final payment total is confirmed at checkout.` : "Checking your local price…"}</p>
         </div>
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {packageContent.map((item, index) => {
@@ -121,7 +121,7 @@ function OrynSoundzPage() {
                 </div>
                 <h3 className="mt-5 font-display text-2xl font-bold tracking-tight text-white">{item.name}</h3>
                 <p className="mt-3 min-h-20 text-sm leading-relaxed text-white/70">{item.humanDescription}</p>
-                <p className="mt-5 font-display text-3xl font-semibold tabular-nums text-white">{product ? formatMoney(getLocalizedPrice(product, country).amount, getLocalizedPrice(product, country).currency) : item.fallbackPrice}</p>
+                <p className="mt-5 font-display text-3xl font-semibold tabular-nums text-white">{product && country ? formatMoney(getLocalizedPrice(product, country).amount, getLocalizedPrice(product, country).currency) : "—"}</p>
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-5">
                   {item.items.map((value) => <p key={value} className="flex gap-2 text-sm leading-relaxed text-white/72"><Check className="mt-0.5 size-4 shrink-0 text-[#f0c766]" />{value}</p>)}
                 </div>
