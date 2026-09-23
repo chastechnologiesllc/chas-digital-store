@@ -6,17 +6,12 @@ export function getPaystackSecret(): string | undefined {
   return env("PAYSTACK_SECRET_KEY");
 }
 
-export function getFlutterwaveSecret(): string | undefined {
-  return env("FLUTTERWAVE_SECRET_KEY");
-}
-
 export function getTelegramBotToken(): string | undefined {
   return env("TELEGRAM_BOT_TOKEN");
 }
 
 export function isGatewayLive(gateway: GatewayId): boolean {
-  if (gateway === "paystack") return Boolean(getPaystackSecret());
-  return Boolean(getFlutterwaveSecret());
+  return gateway === "paystack" && Boolean(getPaystackSecret());
 }
 
 export function listGateways(): GatewayInfo[] {
@@ -26,13 +21,6 @@ export function listGateways(): GatewayInfo[] {
       name: "Paystack",
       description: "Cards, bank transfer, USSD, and local methods.",
       live: isGatewayLive("paystack"),
-      enabled: true,
-    },
-    {
-      id: "flutterwave",
-      name: "Flutterwave",
-      description: "Cards, bank, and other Flutterwave checkout methods.",
-      live: isGatewayLive("flutterwave"),
       enabled: true,
     },
   ];

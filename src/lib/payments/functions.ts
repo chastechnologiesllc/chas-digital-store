@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { listGateways } from "./config.server";
 import { getOrderByReference, toPublicOrder } from "./orders.server";
 import { completeDemoPayment, initializePayment, verifyPayment } from "./service.server";
 import { getRequest } from "@tanstack/react-start/server";
@@ -10,10 +9,6 @@ export const getPricingCountryFn = createServerFn({ method: "GET" }).handler(asy
   return getPricingCountryFromHeaders(getRequest().headers);
 });
 
-export const getGatewaysFn = createServerFn({ method: "GET" }).handler(async () => {
-  return listGateways();
-});
-
 export const initializePaymentFn = createServerFn({ method: "POST" })
   .validator(
     z.object({
@@ -21,7 +16,7 @@ export const initializePaymentFn = createServerFn({ method: "POST" })
       name: z.string().min(2).max(80),
       email: z.string().email(),
       phone: z.string().max(20).optional(),
-      gateway: z.enum(["paystack", "flutterwave"]),
+      gateway: z.literal("paystack"),
       country: z.enum(["NG", "US"]).optional(),
     }),
   )

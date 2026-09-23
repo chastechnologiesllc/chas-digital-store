@@ -17,15 +17,10 @@ import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AccessReferenceRouteImport } from './routes/access/$reference'
-import { Route as CheckoutSlugRouteImport } from './routes/checkout/$slug'
 import { Route as ClassesIndexRouteImport } from './routes/classes/index'
 import { Route as ClassesSlugRouteImport } from './routes/classes/$slug'
-import { Route as PayDemoRouteImport } from './routes/pay/demo'
 import { Route as ProgramsOrynSoundzRouteImport } from './routes/programs/oryn-soundz'
 import { Route as ProgramsOrynSoundzSlugRouteImport } from './routes/programs/oryn-soundz/$slug'
-import { Route as ApiPaymentsFlutterwaveInitializeRouteImport } from './routes/api/payments/flutterwave/initialize'
-import { Route as ApiPaymentsFlutterwaveVerifyRouteImport } from './routes/api/payments/flutterwave/verify'
-import { Route as ApiPaymentsFlutterwaveWebhookRouteImport } from './routes/api/payments/flutterwave/webhook'
 import { Route as ApiPaymentsPaystackInitializeRouteImport } from './routes/api/payments/paystack/initialize'
 import { Route as ApiPaymentsPaystackVerifyRouteImport } from './routes/api/payments/paystack/verify'
 import { Route as ApiPaymentsPaystackWebhookRouteImport } from './routes/api/payments/paystack/webhook'
@@ -70,11 +65,6 @@ const AccessReferenceRoute = AccessReferenceRouteImport.update({
   path: '/access/$reference',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CheckoutSlugRoute = CheckoutSlugRouteImport.update({
-  id: '/checkout/$slug',
-  path: '/checkout/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ClassesIndexRoute = ClassesIndexRouteImport.update({
   id: '/classes/',
   path: '/classes/',
@@ -83,11 +73,6 @@ const ClassesIndexRoute = ClassesIndexRouteImport.update({
 const ClassesSlugRoute = ClassesSlugRouteImport.update({
   id: '/classes/$slug',
   path: '/classes/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PayDemoRoute = PayDemoRouteImport.update({
-  id: '/pay/demo',
-  path: '/pay/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramsOrynSoundzRoute = ProgramsOrynSoundzRouteImport.update({
@@ -100,24 +85,6 @@ const ProgramsOrynSoundzSlugRoute = ProgramsOrynSoundzSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProgramsOrynSoundzRoute,
 } as any)
-const ApiPaymentsFlutterwaveInitializeRoute =
-  ApiPaymentsFlutterwaveInitializeRouteImport.update({
-    id: '/api/payments/flutterwave/initialize',
-    path: '/api/payments/flutterwave/initialize',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPaymentsFlutterwaveVerifyRoute =
-  ApiPaymentsFlutterwaveVerifyRouteImport.update({
-    id: '/api/payments/flutterwave/verify',
-    path: '/api/payments/flutterwave/verify',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPaymentsFlutterwaveWebhookRoute =
-  ApiPaymentsFlutterwaveWebhookRouteImport.update({
-    id: '/api/payments/flutterwave/webhook',
-    path: '/api/payments/flutterwave/webhook',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiPaymentsPaystackInitializeRoute =
   ApiPaymentsPaystackInitializeRouteImport.update({
     id: '/api/payments/paystack/initialize',
@@ -146,15 +113,10 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/access/$reference': typeof AccessReferenceRoute
-  '/checkout/$slug': typeof CheckoutSlugRoute
   '/classes/$slug': typeof ClassesSlugRoute
-  '/pay/demo': typeof PayDemoRoute
   '/programs/oryn-soundz': typeof ProgramsOrynSoundzRouteWithChildren
   '/classes/': typeof ClassesIndexRoute
   '/programs/oryn-soundz/$slug': typeof ProgramsOrynSoundzSlugRoute
-  '/api/payments/flutterwave/initialize': typeof ApiPaymentsFlutterwaveInitializeRoute
-  '/api/payments/flutterwave/verify': typeof ApiPaymentsFlutterwaveVerifyRoute
-  '/api/payments/flutterwave/webhook': typeof ApiPaymentsFlutterwaveWebhookRoute
   '/api/payments/paystack/initialize': typeof ApiPaymentsPaystackInitializeRoute
   '/api/payments/paystack/verify': typeof ApiPaymentsPaystackVerifyRoute
   '/api/payments/paystack/webhook': typeof ApiPaymentsPaystackWebhookRoute
@@ -168,15 +130,10 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/access/$reference': typeof AccessReferenceRoute
-  '/checkout/$slug': typeof CheckoutSlugRoute
   '/classes/$slug': typeof ClassesSlugRoute
-  '/pay/demo': typeof PayDemoRoute
   '/programs/oryn-soundz': typeof ProgramsOrynSoundzRouteWithChildren
   '/classes': typeof ClassesIndexRoute
   '/programs/oryn-soundz/$slug': typeof ProgramsOrynSoundzSlugRoute
-  '/api/payments/flutterwave/initialize': typeof ApiPaymentsFlutterwaveInitializeRoute
-  '/api/payments/flutterwave/verify': typeof ApiPaymentsFlutterwaveVerifyRoute
-  '/api/payments/flutterwave/webhook': typeof ApiPaymentsFlutterwaveWebhookRoute
   '/api/payments/paystack/initialize': typeof ApiPaymentsPaystackInitializeRoute
   '/api/payments/paystack/verify': typeof ApiPaymentsPaystackVerifyRoute
   '/api/payments/paystack/webhook': typeof ApiPaymentsPaystackWebhookRoute
@@ -191,15 +148,10 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/access/$reference': typeof AccessReferenceRoute
-  '/checkout/$slug': typeof CheckoutSlugRoute
   '/classes/$slug': typeof ClassesSlugRoute
-  '/pay/demo': typeof PayDemoRoute
   '/programs/oryn-soundz': typeof ProgramsOrynSoundzRouteWithChildren
   '/classes/': typeof ClassesIndexRoute
   '/programs/oryn-soundz/$slug': typeof ProgramsOrynSoundzSlugRoute
-  '/api/payments/flutterwave/initialize': typeof ApiPaymentsFlutterwaveInitializeRoute
-  '/api/payments/flutterwave/verify': typeof ApiPaymentsFlutterwaveVerifyRoute
-  '/api/payments/flutterwave/webhook': typeof ApiPaymentsFlutterwaveWebhookRoute
   '/api/payments/paystack/initialize': typeof ApiPaymentsPaystackInitializeRoute
   '/api/payments/paystack/verify': typeof ApiPaymentsPaystackVerifyRoute
   '/api/payments/paystack/webhook': typeof ApiPaymentsPaystackWebhookRoute
@@ -215,15 +167,10 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/access/$reference'
-    | '/checkout/$slug'
     | '/classes/$slug'
-    | '/pay/demo'
     | '/programs/oryn-soundz'
     | '/classes/'
     | '/programs/oryn-soundz/$slug'
-    | '/api/payments/flutterwave/initialize'
-    | '/api/payments/flutterwave/verify'
-    | '/api/payments/flutterwave/webhook'
     | '/api/payments/paystack/initialize'
     | '/api/payments/paystack/verify'
     | '/api/payments/paystack/webhook'
@@ -237,15 +184,10 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/access/$reference'
-    | '/checkout/$slug'
     | '/classes/$slug'
-    | '/pay/demo'
     | '/programs/oryn-soundz'
     | '/classes'
     | '/programs/oryn-soundz/$slug'
-    | '/api/payments/flutterwave/initialize'
-    | '/api/payments/flutterwave/verify'
-    | '/api/payments/flutterwave/webhook'
     | '/api/payments/paystack/initialize'
     | '/api/payments/paystack/verify'
     | '/api/payments/paystack/webhook'
@@ -259,15 +201,10 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/access/$reference'
-    | '/checkout/$slug'
     | '/classes/$slug'
-    | '/pay/demo'
     | '/programs/oryn-soundz'
     | '/classes/'
     | '/programs/oryn-soundz/$slug'
-    | '/api/payments/flutterwave/initialize'
-    | '/api/payments/flutterwave/verify'
-    | '/api/payments/flutterwave/webhook'
     | '/api/payments/paystack/initialize'
     | '/api/payments/paystack/verify'
     | '/api/payments/paystack/webhook'
@@ -282,14 +219,9 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   AccessReferenceRoute: typeof AccessReferenceRoute
-  CheckoutSlugRoute: typeof CheckoutSlugRoute
   ClassesSlugRoute: typeof ClassesSlugRoute
-  PayDemoRoute: typeof PayDemoRoute
   ProgramsOrynSoundzRoute: typeof ProgramsOrynSoundzRouteWithChildren
   ClassesIndexRoute: typeof ClassesIndexRoute
-  ApiPaymentsFlutterwaveInitializeRoute: typeof ApiPaymentsFlutterwaveInitializeRoute
-  ApiPaymentsFlutterwaveVerifyRoute: typeof ApiPaymentsFlutterwaveVerifyRoute
-  ApiPaymentsFlutterwaveWebhookRoute: typeof ApiPaymentsFlutterwaveWebhookRoute
   ApiPaymentsPaystackInitializeRoute: typeof ApiPaymentsPaystackInitializeRoute
   ApiPaymentsPaystackVerifyRoute: typeof ApiPaymentsPaystackVerifyRoute
   ApiPaymentsPaystackWebhookRoute: typeof ApiPaymentsPaystackWebhookRoute
@@ -353,13 +285,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccessReferenceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/checkout/$slug': {
-      id: '/checkout/$slug'
-      path: '/checkout/$slug'
-      fullPath: '/checkout/$slug'
-      preLoaderRoute: typeof CheckoutSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/classes/': {
       id: '/classes/'
       path: '/classes'
@@ -372,13 +297,6 @@ declare module '@tanstack/react-router' {
       path: '/classes/$slug'
       fullPath: '/classes/$slug'
       preLoaderRoute: typeof ClassesSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pay/demo': {
-      id: '/pay/demo'
-      path: '/pay/demo'
-      fullPath: '/pay/demo'
-      preLoaderRoute: typeof PayDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programs/oryn-soundz': {
@@ -394,27 +312,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/programs/oryn-soundz/$slug'
       preLoaderRoute: typeof ProgramsOrynSoundzSlugRouteImport
       parentRoute: typeof ProgramsOrynSoundzRoute
-    }
-    '/api/payments/flutterwave/initialize': {
-      id: '/api/payments/flutterwave/initialize'
-      path: '/api/payments/flutterwave/initialize'
-      fullPath: '/api/payments/flutterwave/initialize'
-      preLoaderRoute: typeof ApiPaymentsFlutterwaveInitializeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/payments/flutterwave/verify': {
-      id: '/api/payments/flutterwave/verify'
-      path: '/api/payments/flutterwave/verify'
-      fullPath: '/api/payments/flutterwave/verify'
-      preLoaderRoute: typeof ApiPaymentsFlutterwaveVerifyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/payments/flutterwave/webhook': {
-      id: '/api/payments/flutterwave/webhook'
-      path: '/api/payments/flutterwave/webhook'
-      fullPath: '/api/payments/flutterwave/webhook'
-      preLoaderRoute: typeof ApiPaymentsFlutterwaveWebhookRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/api/payments/paystack/initialize': {
       id: '/api/payments/paystack/initialize'
@@ -460,14 +357,9 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   AccessReferenceRoute: AccessReferenceRoute,
-  CheckoutSlugRoute: CheckoutSlugRoute,
   ClassesSlugRoute: ClassesSlugRoute,
-  PayDemoRoute: PayDemoRoute,
   ProgramsOrynSoundzRoute: ProgramsOrynSoundzRouteWithChildren,
   ClassesIndexRoute: ClassesIndexRoute,
-  ApiPaymentsFlutterwaveInitializeRoute: ApiPaymentsFlutterwaveInitializeRoute,
-  ApiPaymentsFlutterwaveVerifyRoute: ApiPaymentsFlutterwaveVerifyRoute,
-  ApiPaymentsFlutterwaveWebhookRoute: ApiPaymentsFlutterwaveWebhookRoute,
   ApiPaymentsPaystackInitializeRoute: ApiPaymentsPaystackInitializeRoute,
   ApiPaymentsPaystackVerifyRoute: ApiPaymentsPaystackVerifyRoute,
   ApiPaymentsPaystackWebhookRoute: ApiPaymentsPaystackWebhookRoute,

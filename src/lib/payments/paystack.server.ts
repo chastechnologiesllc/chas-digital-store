@@ -26,7 +26,7 @@ export async function initializePaystack(
 ): Promise<{ checkoutUrl: string }> {
   const secret = getPaystackSecret();
   if (!secret) {
-    return { checkoutUrl: `${origin}/pay/demo?reference=${encodeURIComponent(order.reference)}&gateway=paystack` };
+    throw new Error("Paystack is not configured. Add PAYSTACK_SECRET_KEY in Vercel before accepting payments.");
   }
 
   const response = await fetch("https://api.paystack.co/transaction/initialize", {

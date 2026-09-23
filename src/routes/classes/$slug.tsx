@@ -1,13 +1,19 @@
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { Check, Copy, Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { getCategory } from "@/data/categories";
 import { getProductBySlug } from "@/data/products";
 import { formatMoney } from "@/lib/format";
+import { getLocalizedPrice, type PricingCountry } from "@/lib/pricing";
+import { getPricingCountryFn, initializePaymentFn } from "@/lib/payments/functions";
 
 export const Route = createFileRoute("/classes/$slug")({
   loader: ({ params }) => {
@@ -33,7 +39,28 @@ export const Route = createFileRoute("/classes/$slug")({
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const category = getCategory(product.category);
+  const initialize = useServerFn(initializePaymentFn);
   const [copied, setCopied] = useState(false);
+  const [country, setCountry] = useState<PricingCountry | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const localizedPrice = country ? getLocalizedPrice(product, country) : null;
+
+  useEffect(() => { getPricingCountryFn().then(setCountry).catch(() => undefined); }, []);
+
+  async function startPayment(event: FormEvent) {
+    event.preventDefault();
+    if (!country) { toast.error("Still detecting your country. Please try again in a moment."); return; }
+    setSubmitting(true);
+    try {
+      const result = await initialize({ data: { productId: product.id, name, email, gateway: "paystack", country } });
+      window.location.assign(result.checkoutUrl);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Unable to open Paystack.");
+      setSubmitting(false);
+    }
+  }
 
   const copyClassLink = async () => {
     await navigator.clipboard.writeText(window.location.href);
@@ -137,38 +164,35 @@ function ProductPage() {
         </div>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-24 rounded-xl bg-card p-5 shadow-[0_0_0_1px_rgb(238_241_244/0.08)]">
+          <form id="class-payment-form" onSubmit={startPayment} className="sticky top-24 rounded-xl bg-card p-5 shadow-[0_0_0_1px_rgb(238_241_244/0.08)]">
             <p className="text-xs text-muted-foreground">Price</p>
             <p className="mt-1 font-display text-3xl font-semibold tabular-nums">
-              {formatMoney(product.price, product.currency)}
+              {localizedPrice ? formatMoney(localizedPrice.amount, localizedPrice.currency) : "Checking local price…"}
             </p>
+            <div className="mt-4 space-y-3"><div className="space-y-1.5"><Label htmlFor="class-name">Full name</Label><Input id="class-name" required minLength={2} value={name} onChange={(event) => setName(event.target.value)} /></div><div className="space-y-1.5"><Label htmlFor="class-email">Email address</Label><Input id="class-email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></div></div>
             <Separator className="my-4" />
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>Delivery: Telegram</li>
               <li>Level: {product.skillLevel}</li>
               <li>Instant access after checkout</li>
             </ul>
-            <Button asChild className="mt-5 w-full" size="lg">
-              <Link to="/checkout/$slug" params={{ slug: product.slug }}>
-                Get Access
-              </Link>
+            <Button type="submit" className="mt-5 w-full" size="lg" disabled={submitting || !localizedPrice}>
+              {submitting ? "Opening Paystack…" : "Make payment with Paystack"}
             </Button>
             <p className="mt-3 text-xs text-muted-foreground">
-              You will complete checkout before any Telegram invite is created.
+              Secure payment handled by Paystack. Access is issued after payment verification.
             </p>
-          </div>
+          </form>
         </aside>
       </div>
 
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 p-3 backdrop-blur-md lg:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
           <p className="font-display text-lg font-semibold tabular-nums">
-            {formatMoney(product.price, product.currency)}
+            {localizedPrice ? formatMoney(localizedPrice.amount, localizedPrice.currency) : "Checking…"}
           </p>
-          <Button asChild>
-            <Link to="/checkout/$slug" params={{ slug: product.slug }}>
-              Get Access
-            </Link>
+          <Button type="submit" form="class-payment-form" disabled={submitting || !localizedPrice}>
+            {submitting ? "Opening…" : "Pay with Paystack"}
           </Button>
         </div>
       </div>

@@ -17,7 +17,7 @@ export const SITE_FAQS: FaqItem[] = [
   {
     question: "Which payment methods are accepted?",
     answer:
-      "Checkout supports Paystack and Flutterwave. Cards, bank transfers, and other local options are available at checkout depending on your preferred provider.",
+      "Payments are handled securely by Paystack. Cards, bank transfers, USSD, and other available payment options are shown by Paystack based on your country and bank.",
   },
   {
     question: "Do I need a Telegram account?",

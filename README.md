@@ -5,8 +5,8 @@ A production-ready digital learning storefront for **chAs Technologies LLC**. Th
 ## Features
 
 - Responsive storefront with product and class catalogues.
-- Product detail, checkout, payment-access, FAQ, contact, privacy, and terms pages.
-- Paystack and Flutterwave payment flows, including initialize, verify, and webhook routes.
+- Product detail, payment-access, FAQ, contact, privacy, and terms pages.
+- Paystack payment flow, including initialize, verify, and webhook routes.
 - Telegram delivery support for paid products and order notifications.
 - Better Auth integration with an offline-friendly PGlite preview path.
 - PostgreSQL-backed server data access through Kysely and `pg`.
@@ -66,7 +66,6 @@ Use [`.env.example`](.env.example) as the authoritative list of supported settin
 | `APP_URL` | Production URL used for canonical links and payment callbacks. |
 | `DATABASE_URL` | PostgreSQL connection string. Vercel Postgres or another compatible provider may be used. |
 | `PAYSTACK_*` | Paystack secret and public keys. |
-| `FLUTTERWAVE_*` | Flutterwave keys and webhook hash. |
 | `TELEGRAM_*` | Bot token and product-to-chat delivery mapping. |
 | `GROK_PROJECT_ID` | Optional platform-provided deployment identifier. |
 
@@ -98,7 +97,7 @@ For local development without PostgreSQL, the preview/auth layer can use the PGl
 
 ## Payment and delivery flows
 
-Payment routes are grouped by provider under [`src/routes/api/payments/`](src/routes/api/payments/). Each provider has initialize, verify, and webhook handlers. Server-side payment services live under [`src/lib/payments/`](src/lib/payments/), where provider configuration, order handling, and Telegram delivery are kept out of client bundles.
+Payment routes are grouped under [`src/routes/api/payments/`](src/routes/api/payments/). Paystack provides initialize, verify, and webhook handlers. Server-side payment services live under [`src/lib/payments/`](src/lib/payments/), where provider configuration, order handling, and Telegram delivery are kept out of client bundles.
 
 Before enabling live payments:
 

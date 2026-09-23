@@ -117,7 +117,7 @@ function AccessPage() {
             </Button>
             {product ? (
               <Button asChild>
-                <Link to="/checkout/$slug" params={{ slug: product.slug }}>
+                <Link to={product.slug === "ai-music-generator" || product.slug.startsWith("oryn-soundz-") ? "/programs/oryn-soundz/$slug" : "/classes/$slug"} params={{ slug: product.slug }}>
                   Try again
                 </Link>
               </Button>

@@ -10,7 +10,6 @@ import {
 import { generateTelegramAccess } from "./telegram.server";
 import { getPublicOrigin, isGatewayLive } from "./config.server";
 import { initializePaystack, verifyPaystack } from "./paystack.server";
-import { initializeFlutterwave, verifyFlutterwave } from "./flutterwave.server";
 import { getRequest } from "@tanstack/react-start/server";
 import { getLocalizedPrice, getPricingCountryFromHeaders, normalizePricingCountry } from "@/lib/pricing";
 import type {
@@ -38,7 +37,7 @@ export async function initializePayment(
     throw new Error("This class does not have a valid price.");
   }
 
-  const live = isGatewayLive(input.gateway);
+  const live = isGatewayLive("paystack");
   const order = await createPendingOrder({
     productId: product.id,
     productName: product.name,
@@ -52,10 +51,7 @@ export async function initializePayment(
   });
 
   const origin = getPublicOrigin(requestUrl);
-  const checkout =
-    input.gateway === "paystack"
-      ? await initializePaystack(order, origin)
-      : await initializeFlutterwave(order, origin);
+  const checkout = await initializePaystack(order, origin);
 
   await recordPaymentEvent(order.id, input.gateway, "initialized");
   return { reference: order.reference, checkoutUrl: checkout.checkoutUrl, live };
@@ -118,10 +114,7 @@ export async function verifyPayment(
     return toPublicOrder(order);
   }
 
-  const result =
-    order.gateway === "paystack"
-      ? await verifyPaystack(reference, order)
-      : await verifyFlutterwave(reference, order, extra?.transactionId);
+  const result = await verifyPaystack(reference, order);
 
   const updated = await applyVerification(reference, result);
   return toPublicOrder(updated ?? order);
@@ -170,10 +163,7 @@ export async function handleGatewayWebhook(
   if (order.status === "paid") return;
   if (!order.live) return;
 
-  const result =
-    gateway === "paystack"
-      ? await verifyPaystack(reference, order)
-      : await verifyFlutterwave(reference, order, extra?.transactionId);
+  const result = await verifyPaystack(reference, order);
 
   await applyVerification(reference, result, extra?.transactionId);
 }

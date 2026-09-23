@@ -1,4 +1,4 @@
-export type GatewayId = "paystack" | "flutterwave";
+export type GatewayId = "paystack";
 export type OrderStatus = "pending" | "paid" | "failed" | "cancelled";
 export type TelegramAccessStatus = "not_generated" | "generated" | "failed";
 

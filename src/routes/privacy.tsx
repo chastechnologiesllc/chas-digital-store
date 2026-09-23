@@ -23,7 +23,7 @@ function PrivacyPage() {
         <section>
           <h2 className="font-medium text-foreground">Payment information</h2>
           <p className="mt-2">
-            Card details and bank information are entered directly on Paystack or Flutterwave — not on this website. We do not store or handle your payment credentials.
+            Card details and bank information are entered directly on Paystack — not on this website. We do not store or handle your payment credentials.
           </p>
         </section>
         <section>
