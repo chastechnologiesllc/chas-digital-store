@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getProductBySlug } from "@/data/products";
 import { formatMoney } from "@/lib/format";
+import { getLocalizedPrice, getCountryLabel, type PricingCountry } from "@/lib/pricing";
+import { getPricingCountryFn } from "@/lib/payments/functions";
 
 export const Route = createFileRoute("/programs/oryn-soundz")({
   component: OrynSoundzPage,
@@ -55,6 +58,13 @@ const packageContent = [
 ] as const;
 
 function OrynSoundzPage() {
+  const detectCountry = getPricingCountryFn;
+  const [country, setCountry] = useState<PricingCountry>("NG");
+
+  useEffect(() => {
+    detectCountry().then(setCountry).catch(() => undefined);
+  }, [detectCountry]);
+
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
       <section className="relative mt-6 overflow-hidden rounded-3xl border border-[#b38a45]/30 bg-[#100d0a] shadow-[0_0_0_1px_rgb(238_241_244/0.08)] sm:mt-10">
@@ -88,6 +98,7 @@ function OrynSoundzPage() {
           <p className="text-xs uppercase tracking-[0.18em] text-accent">Choose your next step</p>
           <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">Three packages. One clear progression.</h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Each package builds on the one before it, so you can start at the level that feels right and upgrade when your music is ready for more.</p>
+          <p className="mt-3 text-xs text-accent">Showing prices for {getCountryLabel(country)}. Your final payment total is confirmed at checkout.</p>
         </div>
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {packageContent.map((item, index) => {
@@ -103,7 +114,7 @@ function OrynSoundzPage() {
                 </div>
                 <h3 className="mt-5 font-display text-2xl font-bold tracking-tight text-white">{item.name}</h3>
                 <p className="mt-3 min-h-20 text-sm leading-relaxed text-white/70">{item.humanDescription}</p>
-                <p className="mt-5 font-display text-3xl font-semibold tabular-nums text-white">{product ? formatMoney(product.price, product.currency) : item.fallbackPrice}</p>
+                <p className="mt-5 font-display text-3xl font-semibold tabular-nums text-white">{product ? formatMoney(getLocalizedPrice(product, country).amount, getLocalizedPrice(product, country).currency) : item.fallbackPrice}</p>
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-5">
                   {item.items.map((value) => <p key={value} className="flex gap-2 text-sm leading-relaxed text-white/72"><Check className="mt-0.5 size-4 shrink-0 text-[#f0c766]" />{value}</p>)}
                 </div>

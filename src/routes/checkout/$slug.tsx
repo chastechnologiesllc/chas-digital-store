@@ -7,10 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { getProductBySlug } from "@/data/products";
-import { getGatewaysFn, initializePaymentFn } from "@/lib/payments/functions";
+import { getGatewaysFn, getPricingCountryFn, initializePaymentFn } from "@/lib/payments/functions";
 import type { GatewayId, GatewayInfo } from "@/lib/payments/types";
 import { formatMoney } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { getLocalizedPrice, getCountryLabel, type PricingCountry } from "@/lib/pricing";
 
 export const Route = createFileRoute("/checkout/$slug")({
   loader: ({ params }) => {
@@ -28,12 +29,16 @@ function CheckoutPage() {
   const { product } = Route.useLoaderData();
   const initialize = useServerFn(initializePaymentFn);
   const loadGateways = useServerFn(getGatewaysFn);
+  const loadCountry = useServerFn(getPricingCountryFn);
   const [gateways, setGateways] = useState<GatewayInfo[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [gateway, setGateway] = useState<GatewayId>("paystack");
   const [submitting, setSubmitting] = useState(false);
+  const [country, setCountry] = useState<PricingCountry>("NG");
+
+  const localizedPrice = getLocalizedPrice(product, country);
 
   useEffect(() => {
     loadGateways()
@@ -50,6 +55,10 @@ function CheckoutPage() {
       });
   }, [loadGateways]);
 
+  useEffect(() => {
+    loadCountry().then(setCountry).catch(() => undefined);
+  }, [loadCountry]);
+
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setSubmitting(true);
@@ -61,6 +70,7 @@ function CheckoutPage() {
           email,
           phone: phone || undefined,
           gateway,
+          country,
         },
       });
       window.location.assign(result.checkoutUrl);
@@ -131,7 +141,7 @@ function CheckoutPage() {
         </fieldset>
 
         <Button type="submit" size="lg" className="mt-8 w-full sm:w-auto" disabled={submitting}>
-          {submitting ? "Starting checkout…" : `Pay ${formatMoney(product.price, product.currency)}`}
+          {submitting ? "Starting checkout…" : `Pay ${formatMoney(localizedPrice.amount, localizedPrice.currency)}`}
         </Button>
         {selected && !selected.live ? (
           <p className="mt-3 text-xs text-muted-foreground">
@@ -150,10 +160,11 @@ function CheckoutPage() {
         />
         <p className="mt-4 text-sm text-muted-foreground">{product.description}</p>
         <p className="mt-5 font-display text-2xl font-semibold tabular-nums">
-          {formatMoney(product.price, product.currency)}
+          {formatMoney(localizedPrice.amount, localizedPrice.currency)}
         </p>
-        <Link to="/classes/$slug" params={{ slug: product.slug }} className="mt-4 inline-block text-sm text-accent hover:underline">
-          Back to class details
+        <p className="mt-2 text-xs text-muted-foreground">Price for {getCountryLabel(country)}</p>
+        <Link to={product.slug === "ai-music-generator" || product.slug.startsWith("oryn-soundz-") ? "/programs/oryn-soundz/$slug" : "/classes/$slug"} params={{ slug: product.slug }} className="mt-4 inline-block text-sm text-accent hover:underline">
+          Back to package details
         </Link>
       </aside>
     </main>

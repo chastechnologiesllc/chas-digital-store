@@ -11,6 +11,8 @@ import { generateTelegramAccess } from "./telegram.server";
 import { getPublicOrigin, isGatewayLive } from "./config.server";
 import { initializePaystack, verifyPaystack } from "./paystack.server";
 import { initializeFlutterwave, verifyFlutterwave } from "./flutterwave.server";
+import { getRequest } from "@tanstack/react-start/server";
+import { getLocalizedPrice, getPricingCountryFromHeaders, normalizePricingCountry } from "@/lib/pricing";
 import type {
   GatewayId,
   InitializeInput,
@@ -30,7 +32,9 @@ export async function initializePayment(
   if (!product.active) {
     throw new Error("This class is not currently for sale.");
   }
-  if (product.price <= 0) {
+  const country = normalizePricingCountry(input.country ?? getPricingCountryFromHeaders(getRequest().headers));
+  const localizedPrice = getLocalizedPrice(product, country);
+  if (localizedPrice.amount <= 0) {
     throw new Error("This class does not have a valid price.");
   }
 
@@ -41,8 +45,8 @@ export async function initializePayment(
     customerName: input.name.trim(),
     customerEmail: input.email.trim().toLowerCase(),
     customerPhone: input.phone?.trim() || undefined,
-    amount: koboFromMajor(product.price),
-    currency: product.currency,
+    amount: koboFromMajor(localizedPrice.amount),
+    currency: localizedPrice.currency,
     gateway: input.gateway,
     live,
   });

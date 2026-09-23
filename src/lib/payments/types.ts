@@ -53,6 +53,7 @@ export type InitializeInput = {
   email: string;
   phone?: string;
   gateway: GatewayId;
+  country?: "NG" | "US";
 };
 
 export type InitializeResult = {
