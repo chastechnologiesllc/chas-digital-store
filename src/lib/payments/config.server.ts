@@ -2,8 +2,14 @@ import { env } from "@/lib/env.server";
 import { getRequest } from "@tanstack/react-start/server";
 import type { GatewayId, GatewayInfo } from "./types";
 
+const PAYSTACK_PUBLIC_KEY = "pk_live_d145dd30b0e40a54e3d2533dfc544e41ea63fe94";
+
 export function getPaystackSecret(): string | undefined {
   return env("PAYSTACK_SECRET_KEY");
+}
+
+export function getPaystackPublicKey(): string {
+  return env("PAYSTACK_PUBLIC_KEY") || PAYSTACK_PUBLIC_KEY;
 }
 
 export function getTelegramBotToken(): string | undefined {

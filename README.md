@@ -65,7 +65,8 @@ Use [`.env.example`](.env.example) as the authoritative list of supported settin
 | --- | --- |
 | `APP_URL` | Production URL used for canonical links and payment callbacks. |
 | `DATABASE_URL` | PostgreSQL connection string. Vercel Postgres or another compatible provider may be used. |
-| `PAYSTACK_*` | Paystack secret and public keys. |
+| `PAYSTACK_SECRET_KEY` | Private Paystack server key used to initialize and verify payments. Keep it only in Vercel environment variables. |
+| `PAYSTACK_PUBLIC_KEY` | Public Paystack key; safe to expose, but optional for the hosted checkout flow. |
 | `TELEGRAM_*` | Bot token and product-to-chat delivery mapping. |
 | `GROK_PROJECT_ID` | Optional platform-provided deployment identifier. |
 

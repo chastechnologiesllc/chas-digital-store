@@ -1,5 +1,5 @@
 import { createHmac } from "node:crypto";
-import { getPaystackSecret } from "./config.server";
+import { getPaystackPublicKey, getPaystackSecret } from "./config.server";
 import type { Order, VerificationResult } from "./types";
 
 type PaystackInitResponse = {
@@ -25,7 +25,8 @@ export async function initializePaystack(
   origin: string,
 ): Promise<{ checkoutUrl: string }> {
   const secret = getPaystackSecret();
-  if (!secret) {
+  const publicKey = getPaystackPublicKey();
+  if (!secret || !publicKey) {
     throw new Error("Secure payments are not configured yet. Please try again later.");
   }
 
@@ -45,6 +46,7 @@ export async function initializePaystack(
         orderId: order.id,
         productId: order.productId,
         customerName: order.customerName,
+        paymentProviderKey: publicKey,
       },
     }),
   });
