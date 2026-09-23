@@ -1,14 +1,18 @@
 import { pendingMigrations } from "../../scripts/migration-plan.mjs";
+import { env, isWorkspacePreview } from "./env.server";
 
 /** Which database backend is active. */
 export type DbSource = "neon" | "pglite";
 
 // An empty/whitespace DATABASE_URL (an easy misconfig in deploy UIs) must mean
 // "unset" — otherwise production would silently run on the PGLite fallback.
-const rawDatabaseUrl =
-  typeof process !== "undefined" ? process.env.DATABASE_URL : undefined;
 const databaseUrl =
-  rawDatabaseUrl && rawDatabaseUrl.trim() ? rawDatabaseUrl : undefined;
+  env("DATABASE_URL") ||
+  env("POSTGRES_URL") ||
+  env("POSTGRES_PRISMA_URL") ||
+  env("POSTGRES_URL_NON_POOLING") ||
+  env("NEON_DATABASE_URL");
+const deployedWithoutDatabase = !isWorkspacePreview() && !databaseUrl;
 
 /**
  * Active backend: real **Neon** when `DATABASE_URL` is set (deployed / configured
@@ -174,6 +178,11 @@ async function createSql(): Promise<Sql> {
     throw new Error(
       "@/lib/db is server-only — call getSql() from a createServerFn handler " +
         "or a server route loader, never from client code.",
+    );
+  }
+  if (deployedWithoutDatabase) {
+    throw new Error(
+      "Production database is not configured. Add DATABASE_URL (or POSTGRES_URL) to the Vercel environment variables and redeploy.",
     );
   }
   return dbSource === "neon" ? createNeonSql() : createPgliteSql();

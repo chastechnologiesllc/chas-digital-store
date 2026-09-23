@@ -64,7 +64,7 @@ Use [`.env.example`](.env.example) as the authoritative list of supported settin
 | Group | Purpose |
 | --- | --- |
 | `APP_URL` | Production URL used for canonical links and payment callbacks. |
-| `DATABASE_URL` | PostgreSQL connection string. Vercel Postgres or another compatible provider may be used. |
+| `DATABASE_URL` / `POSTGRES_URL` | Required PostgreSQL connection string for production orders, payment records, and access delivery. Vercel Postgres or another compatible provider may be used. |
 | `PAYSTACK_SECRET_KEY` | Private Paystack server key used to initialize and verify payments. Keep it only in Vercel environment variables. |
 | `PAYSTACK_PUBLIC_KEY` | Public Paystack key; safe to expose, but optional for the hosted checkout flow. |
 | `TELEGRAM_*` | Bot token and product-to-chat delivery mapping. |
@@ -94,7 +94,7 @@ The application supports the `VITE_AUTH_ENABLED` build flag. The development/bui
 
 SQL migrations live in [`migrations/`](migrations/). The migration runner applies top-level `.sql` files in filename order and records applied files in the `_migrations` table. The Better Auth schema is maintained under [`migrations/auth/`](migrations/auth/) and is copied into the active migration directory only when authentication is enabled by the surrounding application workflow.
 
-For local development without PostgreSQL, the preview/auth layer can use the PGlite fallback. For production, configure a managed PostgreSQL-compatible database and set `DATABASE_URL`.
+For local development without PostgreSQL, the preview/auth layer can use the PGlite fallback. For production, configure a managed PostgreSQL-compatible database and set `DATABASE_URL` or `POSTGRES_URL`; deployed builds no longer attempt to use the embedded PGlite fallback.
 
 ## Payment and delivery flows
 
@@ -118,7 +118,7 @@ npm run lint
 npm run build
 ```
 
-The build emits a Vercel/Nitro output directory and invokes the migration script. If `DATABASE_URL` is absent, the migration step reports that it is skipping database work; configure the variable in the deployment environment for production database migrations.
+The build emits a Vercel/Nitro output directory and invokes the migration script. Configure `DATABASE_URL` or `POSTGRES_URL` in the deployment environment for production database migrations and payment processing.
 
 [`vercel.json`](vercel.json) adds security headers and long-lived immutable caching for built assets and selected public branding assets.
 
