@@ -101,7 +101,7 @@ function OrynSoundzPage() {
               ))}
             </ul>
             <Button asChild size="lg" className="mt-8 w-full">
-              <Link to="/classes/$slug" params={{ slug: item.slug }}>
+              <Link to="/checkout/$slug" params={{ slug: item.slug }}>
                 Choose package
                 <ArrowRight />
               </Link>

@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { Check, Copy, Send } from "lucide-react";
 import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -11,6 +11,9 @@ import { formatMoney } from "@/lib/format";
 
 export const Route = createFileRoute("/classes/$slug")({
   loader: ({ params }) => {
+    if (params.slug === "ai-music-generator") {
+      throw redirect({ to: "/programs/oryn-soundz" });
+    }
     const product = getProductBySlug(params.slug);
     if (!product) throw notFound();
     return { product };
