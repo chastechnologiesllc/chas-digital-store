@@ -369,15 +369,15 @@ export const PRODUCTS: Product[] = [
   {
     id: "survey-class",
     slug: "survey-class",
-    name: "Survey Class",
+    name: "Online Survey Earnings Class",
     category: "surveys",
     categories: ["surveys", "digital-business", "productivity"],
     description:
-      "Learn how to design, distribute, and use surveys to collect useful data for research, offers, and online business decisions.",
+      "Learn how to find legitimate online survey opportunities, answer simple questions, and earn available rewards from your participation.",
     longDescription:
-      "This class covers practical survey design: asking clearer questions, choosing the right format, distributing surveys, and turning responses into decisions. It is built for people who need real answers from customers, students, or audiences — not academic theory.",
+      "This beginner-friendly class shows you how online paid surveys work, how to identify legitimate platforms, create suitable profiles, qualify for more opportunities, and complete questionnaires carefully. You will also learn how rewards and payouts work, how to track your activity, and how to avoid common survey scams. Earnings and availability vary by platform, location, profile, and the opportunities available.",
     whoItsFor:
-      "Business owners, creators, researchers, and students who need cleaner data from forms and audience questions.",
+      "Beginners, students, and anyone looking for a simple way to explore legitimate online survey opportunities in their spare time.",
     format:
       "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
     price: 25000,
@@ -390,33 +390,33 @@ export const PRODUCTS: Product[] = [
     telegramAccessId: "survey-class",
     duration: "Self-paced",
     features: [
-      "Write questions that people can actually answer",
-      "Avoid leading, stacked, and useless questions",
-      "Choose between forms, polls, and longer surveys",
-      "Distribute surveys to the right audience",
-      "Read results without getting lost in the noise",
-      "Use survey data to shape offers and content",
+      "Understand how online paid surveys work",
+      "Find legitimate survey platforms and opportunities",
+      "Build a profile that matches suitable questionnaires",
+      "Answer simple survey questions accurately and consistently",
+      "Track completed surveys, rewards, and payout progress",
+      "Spot common scams and avoid sharing information unsafely",
     ],
     benefits: [
-      "Stop guessing what your audience wants",
-      "Collect cleaner, more useful responses",
-      "Turn feedback into product and content decisions",
+      "Explore a flexible online activity you can do in your spare time",
+      "Understand how to improve your chances of receiving invitations",
+      "Keep your survey activity organized and safer",
     ],
     requirements: [
-      "Internet access and a Google or similar forms account",
-      "An audience or a plan to find respondents",
-      "No statistics background required",
+      "A smartphone or computer with reliable internet access",
+      "A valid email address and truthful personal profile information",
+      "No previous online survey experience required",
     ],
     faqs: [
       {
-        question: "Is this a statistics class?",
+        question: "Will I definitely make a specific amount of money?",
         answer:
-          "No. It focuses on practical survey design and use. You will learn enough analysis to make decisions, not academic stats.",
+          "No. Survey availability, rewards, eligibility, and payout rules vary by platform, location, and your profile. The class teaches you how to find and use opportunities; it does not guarantee income.",
       },
       {
-        question: "What tools will we use?",
+        question: "How do I avoid fake survey opportunities?",
         answer:
-          "The class uses widely available form and survey tools. You can follow along with common free options.",
+          "You will learn warning signs such as upfront payment demands, unrealistic promises, suspicious links, and requests for unnecessary sensitive information. Always verify a platform independently before joining.",
       },
     ],
     createdAt: "2026-01-25",

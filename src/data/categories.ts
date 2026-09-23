@@ -25,7 +25,7 @@ export const CATEGORIES: Category[] = [
   { id: "websites", label: "AI Apps & Websites", description: "Explore practical classes for building and shipping websites and lightweight apps with AI." },
   { id: "app-development", label: "App Development", description: "Turn ideas into apps with modern AI tooling." },
   { id: "pdf-business", label: "AI PDF Business", description: "Explore classes for researching, designing, and selling useful PDF products with AI." },
-  { id: "surveys", label: "Surveys", description: "Design, distribute, and use surveys professionally." },
+  { id: "surveys", label: "Online Surveys", description: "Learn how to find legitimate online survey opportunities and earn rewards for answering simple questions." },
   { id: "digital-business", label: "Digital Business", description: "Systems for selling digital products online." },
   { id: "productivity", label: "Productivity", description: "Work faster with digital and AI tools." },
   { id: "other", label: "Other", description: "Additional digital classes and products." },

@@ -23,7 +23,7 @@ function AboutPage() {
           {site.storeName} is a catalog of practical digital classes focused on AI, digital tools, online business, and modern technology. Every class is designed to be immediately actionable — you learn by doing, not just watching.
         </p>
         <p>
-          Current classes cover AI video, AI music, AI apps and websites, PDF product businesses, and surveys. New classes are added regularly as the catalog grows.
+          Current classes cover AI video, AI music, AI apps and websites, PDF product businesses, and online survey opportunities. New classes are added regularly as the catalog grows.
         </p>
       </div>
       <dl className="mt-10 grid gap-4 rounded-xl bg-card p-5 text-sm shadow-[0_0_0_1px_rgb(238_241_244/0.08)] sm:grid-cols-2">
