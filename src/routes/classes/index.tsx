@@ -29,13 +29,18 @@ function ClassesPage() {
   const used = getUsedCategories();
   const filters = CATEGORIES.filter((item) => used.has(item.id));
   const products = category ? getProductsByCategory(category) : getActiveProducts();
+  const selectedCategory = category ? CATEGORIES.find((item) => item.id === category) : undefined;
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <p className="text-xs uppercase tracking-[0.18em] text-accent">Catalog</p>
-      <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight">Classes</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight">
+        {selectedCategory ? `${selectedCategory.label} classes` : "Classes"}
+      </h1>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        Practical digital classes on AI, content, websites, PDF products, and surveys.
+        {selectedCategory
+          ? `Explore classes under ${selectedCategory.label.toLowerCase()} and open the course that fits your goal.`
+          : "Explore practical digital classes by category, then open the course you want to learn."}
       </p>
 
       <div className="mt-8 flex flex-wrap gap-2">
@@ -73,7 +78,7 @@ function ClassesPage() {
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} categoryHub={!category} />
           ))}
         </div>
       )}

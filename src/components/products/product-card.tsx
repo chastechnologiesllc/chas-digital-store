@@ -8,9 +8,19 @@ import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-export function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
+export function ProductCard({
+  product,
+  featured = false,
+  categoryHub = false,
+}: {
+  product: Product;
+  featured?: boolean;
+  categoryHub?: boolean;
+}) {
   const category = getCategory(product.category);
-  const isMusicHub = product.slug === "ai-music-generator";
+  const isMusicCourse = product.slug === "ai-music-generator";
+  const isMusicHub = isMusicCourse && categoryHub;
+  const courseTarget = isMusicHub ? "/classes" : isMusicCourse ? "/programs/oryn-soundz" : "/classes/$slug";
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const onMove = (event: MouseEvent<HTMLElement>) => {
@@ -33,8 +43,9 @@ export function ProductCard({ product, featured = false }: { product: Product; f
       style={{ transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
     >
       <Link
-        to={isMusicHub ? "/programs/oryn-soundz" : "/classes/$slug"}
-        params={isMusicHub ? undefined : { slug: product.slug }}
+        to={courseTarget}
+        search={isMusicHub ? { category: "music" } : undefined}
+        params={!isMusicHub && !isMusicCourse ? { slug: product.slug } : undefined}
         className="relative block aspect-[16/10] overflow-hidden bg-surface-2"
       >
         <img
@@ -50,30 +61,36 @@ export function ProductCard({ product, featured = false }: { product: Product; f
         <div className="space-y-2">
           <h3 className="font-display text-lg font-semibold tracking-tight">
             <Link
-              to={isMusicHub ? "/programs/oryn-soundz" : "/classes/$slug"}
-              params={isMusicHub ? undefined : { slug: product.slug }}
+              to={courseTarget}
+              search={isMusicHub ? { category: "music" } : undefined}
+              params={!isMusicHub && !isMusicCourse ? { slug: product.slug } : undefined}
               className="hover:text-accent"
             >
-              {isMusicHub ? "AI Music" : product.name}
+              {isMusicHub ? "AI Music" : isMusicCourse ? "AI Music Generator Class by Oryn Soundz" : product.name}
             </Link>
           </h3>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            {isMusicHub ? "Browse AI music courses created for different skills, goals, and stages." : product.description}
+            {isMusicHub
+              ? "Explore classes under music."
+              : isMusicCourse
+                ? "Learn practical AI music creation, then explore the full course packages."
+                : product.description}
           </p>
         </div>
         {!isMusicHub ? <div className="mt-auto flex flex-wrap gap-2 text-xs text-muted-foreground">
           {featured ? <Badge variant="outline">{product.duration}</Badge> : null}
         </div> : <div className="mt-auto" />}
-        <div className={cn("flex items-end justify-between gap-3", isMusicHub && "justify-end")}>
-          {isMusicHub ? null : <p className="font-display text-xl font-semibold tabular-nums">
+        <div className={cn("flex items-end justify-between gap-3", (isMusicHub || isMusicCourse) && "justify-end")}>
+          {isMusicHub || isMusicCourse ? null : <p className="font-display text-xl font-semibold tabular-nums">
             {formatMoney(product.price, product.currency)}
           </p>}
           <Button asChild size="sm" variant="secondary">
             <Link
-              to={isMusicHub ? "/programs/oryn-soundz" : "/classes/$slug"}
-              params={isMusicHub ? undefined : { slug: product.slug }}
+              to={courseTarget}
+              search={isMusicHub ? { category: "music" } : undefined}
+              params={!isMusicHub && !isMusicCourse ? { slug: product.slug } : undefined}
             >
-              {isMusicHub ? "Browse courses" : "View Class"}
+              {isMusicHub ? "Explore music" : isMusicCourse ? "Open class" : "View Class"}
               <ArrowUpRight />
             </Link>
           </Button>
