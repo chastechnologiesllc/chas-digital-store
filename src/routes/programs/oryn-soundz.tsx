@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -57,12 +57,15 @@ const packageContent = [
 ] as const;
 
 function OrynSoundzPage() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname.replace(/\/$/, "") });
   const detectCountry = getPricingCountryFn;
   const [country, setCountry] = useState<PricingCountry>("NG");
 
   useEffect(() => {
     detectCountry().then(setCountry).catch(() => undefined);
   }, [detectCountry]);
+
+  if (pathname !== "/programs/oryn-soundz") return <Outlet />;
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
