@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Send } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useState, type MouseEvent } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -55,11 +55,6 @@ export function ProductCard({ product, featured = false }: { product: Product; f
           <p className="text-sm leading-relaxed text-muted-foreground">{product.description}</p>
         </div>
         <div className="mt-auto flex flex-wrap gap-2 text-xs text-muted-foreground">
-          <Badge variant="outline">{product.skillLevel}</Badge>
-          <Badge variant="outline" className="gap-1">
-            <Send className="size-3" />
-            Telegram
-          </Badge>
           {featured ? <Badge variant="outline">{product.duration}</Badge> : null}
         </div>
         <div className="flex items-end justify-between gap-3">

@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Check, Send } from "lucide-react";
+import { Check, Copy, Send } from "lucide-react";
+import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,9 @@ export const Route = createFileRoute("/classes/$slug")({
     meta: [
       { title: `${loaderData?.product.name ?? "Class"} · chAs Technologies LLC Digital Store` },
       { name: "description", content: loaderData?.product.description ?? "" },
+      { property: "og:title", content: loaderData?.product.name ?? "Class" },
+      { property: "og:description", content: loaderData?.product.description ?? "" },
+      { property: "og:type", content: "website" },
     ],
   }),
   component: ProductPage,
@@ -26,6 +30,13 @@ export const Route = createFileRoute("/classes/$slug")({
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const category = getCategory(product.category);
+  const [copied, setCopied] = useState(false);
+
+  const copyClassLink = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  };
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 pb-28 pt-10 sm:px-6 sm:pb-16 lg:pt-14">
@@ -34,6 +45,10 @@ function ProductPage() {
           <p className="text-xs uppercase tracking-[0.18em] text-accent">{category?.label ?? product.category}</p>
           <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight">{product.name}</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">{product.longDescription}</p>
+          <Button type="button" variant="outline" size="sm" className="mt-5" onClick={copyClassLink}>
+            <Copy />
+            {copied ? "Class link copied" : "Copy class link"}
+          </Button>
 
           <div className="mt-6 overflow-hidden rounded-xl bg-surface">
             <img
