@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { getProductBySlug } from "@/data/products";
 import { formatMoney } from "@/lib/format";
 import { getLocalizedPrice, getCountryLabel, type PricingCountry } from "@/lib/pricing";
@@ -104,7 +103,13 @@ function OrynSoundzPage() {
           {packageContent.map((item, index) => {
             const product = getProductBySlug(item.slug);
             return (
-              <article key={item.slug} className={`flex h-full flex-col rounded-2xl border p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.05)] ${item.tone}`}>
+              <Link
+                key={item.slug}
+                to="/programs/oryn-soundz/$slug"
+                params={{ slug: item.slug }}
+                aria-label={`Open full details for ${item.name}`}
+                className={`group flex h-full flex-col rounded-2xl border p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.05)] transition duration-200 hover:-translate-y-1 hover:border-[#f0c766]/70 hover:shadow-[0_0_28px_rgb(240_199_102/0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f0c766] ${item.tone}`}
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-xs uppercase tracking-[0.16em] text-[#f0c766]">{item.label}</p>
@@ -119,12 +124,10 @@ function OrynSoundzPage() {
                   {item.items.map((value) => <p key={value} className="flex gap-2 text-sm leading-relaxed text-white/72"><Check className="mt-0.5 size-4 shrink-0 text-[#f0c766]" />{value}</p>)}
                 </div>
                 <div className="mt-auto flex flex-col gap-3 pt-7">
-                  <Button asChild variant="secondary" className="w-full bg-white text-[#111318] hover:bg-white/90">
-                    <Link to="/programs/oryn-soundz/$slug" params={{ slug: item.slug }}>See full package <ArrowRight /></Link>
-                  </Button>
-                  <Link to="/checkout/$slug" params={{ slug: item.slug }} className="text-center text-xs font-medium text-white/60 hover:text-white">Ready to start? Go to checkout</Link>
+                  <span className="flex w-full items-center justify-center gap-2 rounded-md bg-white px-4 py-3 text-sm font-medium text-[#111318] transition group-hover:bg-[#f0c766]">See full package <ArrowRight className="size-4" /></span>
+                  <span className="text-center text-xs font-medium text-white/60">Open the package page to continue to payment</span>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
