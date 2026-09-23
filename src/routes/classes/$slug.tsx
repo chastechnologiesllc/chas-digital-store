@@ -50,9 +50,9 @@ function ProductPage() {
               <Copy />
               {copied ? "Class link copied" : "Copy class link"}
             </Button>
-            {product.category === "music" ? (
+            {product.slug === "ai-music-generator" ? (
               <Button asChild variant="outline" size="sm">
-                <Link to="/programs/oryn-soundz">View Oryn Soundz program</Link>
+                <Link to="/programs/oryn-soundz">View Oryn Soundz packages</Link>
               </Button>
             ) : null}
           </div>
