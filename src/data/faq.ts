@@ -17,7 +17,7 @@ export const SITE_FAQS: FaqItem[] = [
   {
     question: "Which payment methods are accepted?",
     answer:
-      "Payments are handled securely by Paystack. Cards, bank transfers, USSD, and other available payment options are shown by Paystack based on your country and bank.",
+      "Payments are handled securely through our payment provider. Cards, bank transfers, USSD, and other available options depend on your country and bank.",
   },
   {
     question: "Do I need a Telegram account?",

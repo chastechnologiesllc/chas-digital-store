@@ -26,7 +26,7 @@ export async function initializePaystack(
 ): Promise<{ checkoutUrl: string }> {
   const secret = getPaystackSecret();
   if (!secret) {
-    throw new Error("Paystack is not configured. Add PAYSTACK_SECRET_KEY in Vercel before accepting payments.");
+    throw new Error("Secure payments are not configured yet. Please try again later.");
   }
 
   const response = await fetch("https://api.paystack.co/transaction/initialize", {
@@ -51,7 +51,7 @@ export async function initializePaystack(
 
   const json = (await response.json()) as PaystackInitResponse;
   if (!response.ok || !json.status || !json.data?.authorization_url) {
-    throw new Error(json.message || "Paystack could not start this payment.");
+    throw new Error(json.message || "Secure payment could not be started.");
   }
   return { checkoutUrl: json.data.authorization_url };
 }
@@ -59,7 +59,7 @@ export async function initializePaystack(
 export async function verifyPaystack(reference: string, order: Order): Promise<VerificationResult> {
   const secret = getPaystackSecret();
   if (!secret) {
-    return { ok: false, status: "pending", reason: "Paystack is not configured." };
+    return { ok: false, status: "pending", reason: "Secure payments are not configured." };
   }
 
   const response = await fetch(

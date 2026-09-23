@@ -57,7 +57,7 @@ function ProductPage() {
       const result = await initialize({ data: { productId: product.id, name, email, gateway: "paystack", country } });
       window.location.assign(result.checkoutUrl);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Unable to open Paystack.");
+      toast.error(error instanceof Error ? error.message : "Unable to open secure payment.");
       setSubmitting(false);
     }
   }
@@ -177,10 +177,10 @@ function ProductPage() {
               <li>Instant access after checkout</li>
             </ul>
             <Button type="submit" className="mt-5 w-full" size="lg" disabled={submitting || !localizedPrice}>
-              {submitting ? "Opening Paystack…" : "Make payment with Paystack"}
+              {submitting ? "Opening secure payment…" : "Make payment"}
             </Button>
             <p className="mt-3 text-xs text-muted-foreground">
-              Secure payment handled by Paystack. Access is issued after payment verification.
+              Secure online payment. Access is issued after payment verification.
             </p>
           </form>
         </aside>
@@ -192,7 +192,7 @@ function ProductPage() {
             {localizedPrice ? formatMoney(localizedPrice.amount, localizedPrice.currency) : "Checking…"}
           </p>
           <Button type="submit" form="class-payment-form" disabled={submitting || !localizedPrice}>
-            {submitting ? "Opening…" : "Pay with Paystack"}
+            {submitting ? "Opening…" : "Make payment"}
           </Button>
         </div>
       </div>
