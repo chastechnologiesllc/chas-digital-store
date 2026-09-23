@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -106,10 +106,9 @@ function OrynSoundzPage() {
           {packageContent.map((item, index) => {
             const product = getProductBySlug(item.slug);
             return (
-              <Link
+              <a
                 key={item.slug}
-                to="/programs/oryn-soundz/$slug"
-                params={{ slug: item.slug }}
+                href={`/programs/oryn-soundz/${item.slug}`}
                 aria-label={`Open full details for ${item.name}`}
                 className={`group flex h-full flex-col rounded-2xl border p-6 shadow-[0_0_0_1px_rgb(238_241_244/0.05)] transition duration-200 hover:-translate-y-1 hover:border-[#f0c766]/70 hover:shadow-[0_0_28px_rgb(240_199_102/0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f0c766] ${item.tone}`}
               >
@@ -130,7 +129,7 @@ function OrynSoundzPage() {
                   <span className="flex w-full items-center justify-center gap-2 rounded-md bg-white px-4 py-3 text-sm font-medium text-[#111318] transition group-hover:bg-[#f0c766]">See full package <ArrowRight className="size-4" /></span>
                   <span className="text-center text-xs font-medium text-white/60">Open the package page to continue to payment</span>
                 </div>
-              </Link>
+              </a>
             );
           })}
         </div>
