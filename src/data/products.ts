@@ -93,18 +93,18 @@ export const PRODUCTS: Product[] = [
   {
     id: "ai-music-generator",
     slug: "ai-music-generator",
-    name: "AI Music Generator Class",
+    name: "AI Music Starter — Oryn Soundz",
     category: "music",
     categories: ["ai", "music", "content-creation"],
     description:
-      "Learn how to use modern AI music-generation tools to create music, experiment with sounds, and develop practical digital music workflows.",
+      "A beginner-friendly Oryn Soundz program for creating music with AI, from your first prompt to a finished song workflow.",
     longDescription:
-      "This class shows you how to go from a rough idea to usable tracks with AI music tools. You will learn prompting for genre, mood, and structure, how to iterate on weak drafts, and how to turn generated audio into content, product intros, and original digital assets.",
+      "Start with the complete AI music creation workflow: write effective prompts, develop lyrics and songs, shape genre, vocals, mood, BPM, and structure, convert MP3 files to WAV, create cover art, and practise a repeatable beginner process with examples and assignments.",
     whoItsFor:
-      "Beginners, content creators, and digital entrepreneurs who want to create original audio without needing a full music-production background.",
+      "Beginners who want a practical first step into AI music creation and a clear workflow they can practise immediately.",
     format:
-      "Self-paced digital class. Access is delivered to your Telegram instantly after checkout.",
-    price: 35000,
+      "Self-paced digital class with practical lessons, examples, and assignments. Access is delivered after checkout.",
+    price: 5000,
     currency: "NGN",
     image: "/products/ai-music-generator.jpg",
     featured: true,
@@ -114,17 +114,17 @@ export const PRODUCTS: Product[] = [
     telegramAccessId: "ai-music-generator",
     duration: "Self-paced",
     features: [
-      "Write prompts that produce usable songs and loops",
-      "Control genre, mood, tempo, and vocal direction",
-      "Iterate on drafts instead of accepting the first output",
-      "Export and organize tracks for content and products",
-      "Use generated music legally and commercially with care",
-      "Build a simple library of original audio assets",
+      "Create your first AI-assisted music ideas",
+      "Write professional prompts for genre, vocals, mood, BPM, and structure",
+      "Develop lyrics and turn an idea into a song",
+      "Convert MP3 audio to WAV for a cleaner working file",
+      "Create simple, strong cover art for a track",
+      "Follow a complete beginner workflow from prompt to finished draft",
     ],
     benefits: [
-      "Create original music without a studio",
-      "Score videos, ads, and digital products",
-      "Develop a practical audio workflow you can reuse",
+      "Start creating without a traditional studio",
+      "Understand the full beginner workflow instead of guessing",
+      "Leave with practical exercises you can repeat",
     ],
     requirements: [
       "Headphones or speakers",
@@ -135,15 +135,123 @@ export const PRODUCTS: Product[] = [
       {
         question: "Do I need to play an instrument?",
         answer:
-          "No. The class focuses on AI generation, listening, iteration, and practical use of finished tracks.",
+          "No. The starter package is designed for complete beginners and teaches the process step by step.",
       },
       {
         question: "Can I use the music commercially?",
         answer:
-          "You will learn how to check each tool’s usage terms. Commercial use depends on the generator you choose and its current license.",
+          "The starter package focuses on building your skills and workflow; always check the terms of the tools you use before commercial release.",
       },
     ],
     createdAt: "2026-01-15",
+  },
+  {
+    id: "oryn-soundz-artist-release",
+    slug: "oryn-soundz-artist-release",
+    name: "AI Artist & Release — Oryn Soundz",
+    category: "music",
+    categories: ["ai", "music", "content-creation", "digital-business"],
+    description:
+      "Build on the AI Music Starter with artist identity, branding, release preparation, music videos, and a practical artist portfolio.",
+    longDescription:
+      "Package 2 includes the complete AI Music Starter plus a guided artist-and-release workflow. You will shape your identity, prepare music for distribution, create supporting content, and organize a portfolio for your next release.",
+    whoItsFor:
+      "Creators who want to move from making individual AI-assisted songs to presenting themselves as a consistent artist and preparing releases professionally.",
+    format:
+      "Self-paced digital program with practical lessons, examples, and assignments. Includes everything in AI Music Starter.",
+    price: 10000,
+    currency: "NGN",
+    image: "/products/ai-music-generator.jpg",
+    featured: false,
+    active: true,
+    skillLevel: "Intermediate",
+    deliveryType: "telegram",
+    telegramAccessId: "oryn-soundz-artist-release",
+    duration: "Self-paced",
+    features: [
+      "Everything in AI Music Starter",
+      "Define an AI artist identity and point of view",
+      "Build a consistent artist brand and visual direction",
+      "Prepare music distribution uploads, requirements, and metadata",
+      "Claim and organize artist profiles where available",
+      "Create AI music videos and repeatable music content",
+      "Build an artist portfolio and release workflow",
+    ],
+    benefits: [
+      "Move from isolated tracks to a recognizable artist project",
+      "Prepare releases with fewer avoidable mistakes",
+      "Create a portfolio that makes your work easier to present",
+    ],
+    requirements: [
+      "Completion of, or willingness to follow, AI Music Starter",
+      "A computer or smartphone with internet access",
+      "A willingness to practise and refine your artist direction",
+    ],
+    faqs: [
+      {
+        question: "Does this include the starter package?",
+        answer: "Yes. Package 2 unlocks everything in AI Music Starter plus the artist and release lessons.",
+      },
+      {
+        question: "Will my release be approved or guaranteed to perform?",
+        answer: "No. The program teaches preparation and workflow. Approval, reach, and performance depend on the relevant platform and audience.",
+      },
+    ],
+    createdAt: "2026-02-01",
+  },
+  {
+    id: "oryn-soundz-business-coaching",
+    slug: "oryn-soundz-business-coaching",
+    name: "AI Music Business Coaching — Oryn Soundz",
+    category: "music",
+    categories: ["ai", "music", "content-creation", "digital-business"],
+    description:
+      "Unlock the full Oryn Soundz pathway with artist development, release practice, live coaching, and a personalized 30/90-day roadmap.",
+    longDescription:
+      "Package 3 includes everything in AI Music Starter and AI Artist & Release, then adds practical business coaching. Learn how to organize your music business, build an audience, plan content and releases, read analytics, and create a personalized next-step roadmap.",
+    whoItsFor:
+      "Artists and creators who are ready to treat their music activity as a structured project and want guidance on their next 30 and 90 days.",
+    format:
+      "Self-paced digital program plus live coaching. Includes everything in AI Music Starter and AI Artist & Release.",
+    price: 15000,
+    currency: "NGN",
+    image: "/products/ai-music-generator.jpg",
+    featured: false,
+    active: true,
+    skillLevel: "Advanced",
+    deliveryType: "telegram",
+    telegramAccessId: "oryn-soundz-business-coaching",
+    duration: "Coaching program",
+    features: [
+      "Everything in AI Music Starter and AI Artist & Release",
+      "Live coaching and practical music business education",
+      "Explore monetization paths without income guarantees",
+      "Build an audience with a repeatable content strategy",
+      "Plan releases and review analytics for better decisions",
+      "Strengthen personal branding and your music business system",
+      "Create a personalized 30/90-day action roadmap",
+    ],
+    benefits: [
+      "Replace scattered activity with a clear operating system",
+      "Make better decisions from your goals, content, and analytics",
+      "Leave with practical next steps for the next month and quarter",
+    ],
+    requirements: [
+      "Completion of, or willingness to follow, the first two packages",
+      "A current music idea, artist project, or content goal to work on",
+      "Availability for the scheduled coaching format",
+    ],
+    faqs: [
+      {
+        question: "Does Package 3 include the earlier packages?",
+        answer: "Yes. Package 3 unlocks the complete Oryn Soundz pathway plus business coaching.",
+      },
+      {
+        question: "Do you guarantee income, streams, followers, verification, or approval?",
+        answer: "No. Coaching provides education, planning, and feedback. Results depend on your work, decisions, platforms, and audience.",
+      },
+    ],
+    createdAt: "2026-02-01",
   },
   {
     id: "ai-apps-websites",

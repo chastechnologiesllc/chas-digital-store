@@ -45,10 +45,17 @@ function ProductPage() {
           <p className="text-xs uppercase tracking-[0.18em] text-accent">{category?.label ?? product.category}</p>
           <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight">{product.name}</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">{product.longDescription}</p>
-          <Button type="button" variant="outline" size="sm" className="mt-5" onClick={copyClassLink}>
-            <Copy />
-            {copied ? "Class link copied" : "Copy class link"}
-          </Button>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button type="button" variant="outline" size="sm" onClick={copyClassLink}>
+              <Copy />
+              {copied ? "Class link copied" : "Copy class link"}
+            </Button>
+            {product.category === "music" ? (
+              <Button asChild variant="outline" size="sm">
+                <Link to="/programs/oryn-soundz">View Oryn Soundz program</Link>
+              </Button>
+            ) : null}
+          </div>
 
           <div className="mt-6 overflow-hidden rounded-xl bg-surface">
             <img

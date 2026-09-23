@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/classes", label: "Classes" },
+  { to: "/programs/oryn-soundz", label: "Oryn Soundz" },
   { to: "/how-it-works", label: "How It Works" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
